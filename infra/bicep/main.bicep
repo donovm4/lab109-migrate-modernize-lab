@@ -4,9 +4,6 @@ param artifactsLocation string = 'https://raw.githubusercontent.com/crgarcia12/a
 @description('Location for all resources.')
 param location string = 'swedencentral'
 
-@description('VM Password')
-@secure()
-param vmPassword string
 
 @description('Resource name prefix')
 param prefix string
@@ -180,9 +177,7 @@ module windowsVm 'modules/windows-vm.bicep' = {
   params: {
     name: vmName
     location: location
-    vmSize: 'Standard_E16_v3'
-    adminUsername: 'adminuser'
-    adminPassword: vmPassword
+    vmSize: 'Standard_E32as_v5'
     networkInterfaceIds: [
       nicPrimary.outputs.nicId
       nicSecondary.outputs.nicId
@@ -191,11 +186,10 @@ module windowsVm 'modules/windows-vm.bicep' = {
     osDiskStorageAccountType: 'Standard_LRS'
     dataDisks: [
       {
+        lun: 0
         name: '${vmName}-disk1'
-        createOption: 'Empty'
-        diskSizeGB: 1024
-        storageAccountType: 'Standard_LRS'
-        caching: 'ReadOnly'
+        createOption: 'FromImage'
+        caching: 'None'
       }
     ]
     bootDiagnosticsStorageUri: storageAccount.outputs.primaryBlobEndpoint

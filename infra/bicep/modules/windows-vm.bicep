@@ -6,14 +6,7 @@ param name string = 'crgar-migr-vm'
 param location string = 'swedencentral'
 
 @description('The size of the virtual machine')
-param vmSize string = 'Standard_E16_v3'
-
-@description('The admin username')
-param adminUsername string = 'adminuser'
-
-@description('The admin password')
-@secure()
-param adminPassword string
+param vmSize string = 'Standard_E16_v5'
 
 @description('Network interface IDs to attach')
 param networkInterfaceIds array
@@ -38,14 +31,6 @@ param dataDisks array = [
 @description('Boot diagnostics storage account URI')
 param bootDiagnosticsStorageUri string = ''
 
-@description('Image reference for the VM')
-param imageReference object = {
-  publisher: 'MicrosoftWindowsServer'
-  offer: 'WindowsServer'
-  sku: '2022-datacenter'
-  version: 'latest'
-}
-
 @description('DSC extension configuration')
 param dscConfiguration object = {}
 
@@ -63,17 +48,13 @@ resource vm 'Microsoft.Compute/virtualMachines@2023-09-01' = {
     hardwareProfile: {
       vmSize: vmSize
     }
-    osProfile: {
-      computerName: name
-      adminUsername: adminUsername
-      adminPassword: adminPassword
-      windowsConfiguration: {
-        enableAutomaticUpdates: true
-        provisionVMAgent: true
-      }
+    securityProfile: {
+      securityType: 'Standard'
     }
     storageProfile: {
-      imageReference: imageReference
+      imageReference: {
+        id: '/subscriptions/96c2852b-cf88-4a55-9ceb-d632d25b83a4/resourceGroups/CRGAR-VM-GALLERY/providers/Microsoft.Compute/galleries/crgarvmgallery/images/migrate-lab-0.0.4/versions/0.0.4'
+      }
       osDisk: {
         name: osDiskName
         createOption: 'FromImage'
@@ -82,14 +63,14 @@ resource vm 'Microsoft.Compute/virtualMachines@2023-09-01' = {
         }
         caching: 'ReadWrite'
       }
-      dataDisks: [for (disk, i) in dataDisks: {
-        lun: i
+      dataDisks: [for disk in dataDisks: {
+        lun: disk.lun
         name: disk.name
         createOption: disk.createOption
-        diskSizeGB: disk.diskSizeGB
-        managedDisk: {
+        diskSizeGB: contains(disk, 'diskSizeGB') ? disk.diskSizeGB : null
+        managedDisk: contains(disk, 'storageAccountType') ? {
           storageAccountType: disk.storageAccountType
-        }
+        } : null
         caching: disk.caching
       }]
     }
