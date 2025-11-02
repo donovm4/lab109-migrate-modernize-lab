@@ -107,21 +107,53 @@ With this assistant, you can:
 
 We have found our first target application to be migrated: `Contoso University`
 
-Since we are going to modernize it first, lets get in the shoes of the developers that will execute the migration
+1. [] Since we are going to modernize it first, lets get in the shoes of the developers that will execute the migration
 
-1. [ ] Open Visual Studio
-2. [ ] Select Clone a repository
-3. [ ] In the `Repository Location`, paste this repo +++https://github.com/crgarcia12/migrate-modernize-lab.git+++
-4. [ ] Click Cone
+  1. [ ] Open Visual Studio
+  2. [ ] Select Clone a repository
+  3. [ ] In the `Repository Location`, paste this repo +++https://github.com/crgarcia12/migrate-modernize-lab.git+++
+  4. [ ] Click Clone
+
+1.[] Let's open the solution now. In Visual Studio
+  1. [ ] File -> Open
+  2. [ ] Navigate to `migrate-modernize-lab`, `src`, `Contoso University`
+  3. [ ] Find the file `ContosoUniversity.sln`
+  4. [ ] In the `View` menu, click `Solution Explorer`
+  5. [ ] Rebuild the solution
+
+      > [!Hint] TODO: Troubles building? Make sure you have Nuget.org package sources
 
 
-6. [ ] 
+It is not required for the lab, but if you want, you can run the solution in IIS Express (Microsoft Edge)
+ 
+!IMAGE[0030.png](https://raw.githubusercontent.com/crgarcia12/migrate-modernize-lab/refs/heads/main/lab-material/media/0030.png)
+
+Edge will open, and you will see the application running in `https://localhost:44300`
+
+
+===
+
+# Running a code assessment
+
+We will modernize this application.
+The first step is to do a code assessment. For that we will use GitHub Copilot for App Modernization
+
+1. [ ] Right click in the project, and select `Modernize`
+
+!IMAGE[0040.png](https://raw.githubusercontent.com/crgarcia12/migrate-modernize-lab/refs/heads/main/lab-material/media/0040.png)
 ===
 
 
+# Upgrade to a newer version
 
+We will do the migration in two steps. First we will upgrade the application to the latest DotNet, since many packages are outdated with known security vulnerabilities,
 
+1. [ ] Right click in the project, and select `Modernize`
 
+!IMAGE[0050.png](https://raw.githubusercontent.com/crgarcia12/migrate-modernize-lab/refs/heads/main/lab-material/media/0050.png)
+
+Let s review copilot proposal
+===
 
 > [!IMPORTANT]
 > Starting with Visual Studio 2022 17.14.16, the GitHub Copilot app modernization agent is included with Visual Studio. If you're using an older version of Visual Studio 2022, upgrade to the latest release.
