@@ -1,5 +1,6 @@
 @lab.Title
 
+## Hello lab.User.FirstName! 
 ## Welcome to Your Lab Environment
 
 To begin, log into the virtual machine using the following credentials: 
@@ -10,10 +11,22 @@ Password: +++@lab.VirtualMachine(Win11-Pro-Base).Password+++
 # Lab initial setup
 This lab requires some initial setup to ensure that all necessary tools and configurations are in place. Follow the steps below to prepare your environment:
 
-Open The Azure Portal using the credentials in 
-Upload the file
-Login to Github enterprise: https://github.com/enterprises/skillable-events
+## Upload Azure Migrate Assessment
+1. [ ] Open Edge, and head to the Azure Portal using the following link. This link enables some of the preview features we will need later on: +++http://aka.ms/migrate/disconnectedAppliance+++
+1. [ ] Login using the credentials in the Resources tab.
 
+    > [+Hint] Troubles finding the resource tab?
+    >
+    > Navigate to the top right corner of this screen, in there you can always find the credentials and important information
+    > ![text to display](https://raw.githubusercontent.com/crgarcia12/migrate-modernize-lab/refs/heads/main/lab-material/media/0010.png)
+
+
+## Login to GitHub Enterprise
+Login to Github enterprise: +++https://github.com/enterprises/skillable-events+++
+
+> [!Knowledge] ATENTION!
+>
+> Make sure you don't close the GitHub site. Otherwise Copilot might not work
 
 ===
 
@@ -33,13 +46,52 @@ Each part is independent.
 ===
 
 # Part 1: Prepare a migration
-## Assess an on-premises datacenter using Azure Migrate
 ### Understand our lab environment
 
 The lab simulates a datacenter, by having a VM hosting server, and several VMs inside simulating different applications
-![alt text](media/00.png)
-1. [] Open Edge, and go to the Azure Portal. Use the following link to access preview features: +++http://aka.ms/migrate/disconnectedAppliance+++
-1. [] find the on-prem resource group. 
+
+1. [ ] Open Edge, and head to the Azure Portal using the following link. This link enables some of the preview features we will need later on: +++http://aka.ms/migrate/disconnectedAppliance+++
+1. [ ] Login using the credentials in the Resources tab.
+
+> [+Hint] Troubles finding the resource tab?
+>
+> Navigate to the top right corner of this screen, in there you can always find the credentials and important information
+> ![text to display](https://raw.githubusercontent.com/crgarcia12/migrate-modernize-lab/refs/heads/main/lab-material/media/0010.png)
+
+1. [ ] Open the list of resource groups. You will find on called `on-prem`
+2. [ ] Explore the resource group. Find a VM called `lab@lab.LabInstance.Id-vm`
+3. [ ] Open the VM. Click in `Connect`. Wait until the page is fullo loaded
+4. [ ] Click in `Download RDP file` wait until the download is complete and open it
+5. [ ] Login to the VM using the credentials
+    1. [ ] Username: `adminuser`
+    2. [ ] Password: `demo!pass123`
+
+
+You have now loged in into your on-premises server!
+Let's explore whats inside in the next chapter
+
+===
+### Understand our lab environment: The VM
+
+This Virtual machine represents an on-premises server.
+It has nested virtualization. Inside you will find several VMs.
+
+> ![Hyper-V architecture](https://raw.githubusercontent.com/crgarcia12/migrate-modernize-lab/refs/heads/main/lab-material/media/0020.png)
+
+In the windows menu, open the `Hyper-V Manager` to discover the inner VMs.
+
+We will now create another VM, and install the Azure Migrate Disconnected Appliance
+
+
+
+
+
+
+
+
+
+
+
 
 ===
 
