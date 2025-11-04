@@ -211,7 +211,7 @@ module windowsVm 'modules/windows-vm.bicep' = {
 }
 
 module azureMigrate 'modules/azure-migrate.bicep' = {
-  name: 'deploy-azuire-migrate'
+  name: 'deploy-azure-migrate'
   params: {
     location: location  
     name: '${prefix}-azm'

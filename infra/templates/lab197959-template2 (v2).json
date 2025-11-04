@@ -1353,7 +1353,7 @@
     {
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2022-09-01",
-      "name": "deploy-azuire-migrate",
+      "name": "deploy-azure-migrate",
       "properties": {
         "expressionEvaluationOptions": {
           "scope": "inner"

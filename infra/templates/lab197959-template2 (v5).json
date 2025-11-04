@@ -18,8 +18,8 @@
     },
     "location": {
       "type": "string",
-      // "defaultValue": "swedencentral",
-      "defaultValue": "@lab.DeliveryRegionName",
+       "defaultValue": "swedencentral",
+      //"defaultValue": "@lab.DeliveryRegionName",
       "metadata": {
         "description": "Location for all resources."
       }
@@ -1331,7 +1331,7 @@
     {
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2022-09-01",
-      "name": "deploy-azuire-migrate",
+      "name": "deploy-azure-migrate",
       "properties": {
         "expressionEvaluationOptions": {
           "scope": "inner"
