@@ -6,7 +6,7 @@
 
 $SkillableEnvironment = $true
 $environmentName = "" # Set your environment name here for non-Skillable environments
-$ScriptVersion = "3.0.0"
+$ScriptVersion = "5.0.0"
 
 ######################################################
 ##############   INFRASTRUCTURE FUNCTIONS   #########
@@ -1110,7 +1110,7 @@ function Invoke-AzureMigrateConfiguration {
     
     # Environment name and prefix for all azure resources
     if ($SkillableEnvironment) {
-        $environmentName = "lab@lab.LabInstance.ID"
+        $environmentName = "lab<LABINSTANCEID>"
     }
     else {
         $environmentName = $EnvironmentName
