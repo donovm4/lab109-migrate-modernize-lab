@@ -1,88 +1,33 @@
 @lab.Title
 
-## Hello lab.User.FirstName! 
-## Welcome to Your Lab Environment
+## Welcome @lab.User.FirstName! 
 
-To begin, log into the virtual machine using the following credentials: 
+Let's familiarize with the lab environment.
+In the top you will have two tabs **Instructions** and **Resources**
+
+In Resource you will find useful information like credentials and links. You can always go back and forth between them
+
+
+Now, let's begin. Log into the virtual machine using the following credentials: 
 Username: +++@lab.VirtualMachine(Win11-Pro-Base).Username+++
 Password: +++@lab.VirtualMachine(Win11-Pro-Base).Password+++
-
-===
-# Lab initial setup
-This lab requires some initial setup to ensure that all necessary tools and configurations are in place. Follow the steps below to prepare your environment:
-
-## 1. Upload Azure Migrate Assessment
-1. [ ] Open Edge, and head to the Azure Portal using the following link. This link enables some of the preview features we will need later on: +++http://aka.ms/migrate/disconnectedAppliance+++
-2. [ ] Login using the credentials in the Resources tab.
-
-    > [+Hint] Troubles finding the resource tab?
-    >
-    > Navigate to the top right corner of this screen, in there you can always find the credentials and important information
-    > ![text to display](https://raw.githubusercontent.com/crgarcia12/migrate-modernize-lab/refs/heads/main/lab-material/media/0010.png)
-
-3. [ ] In the search bar, search for ++Azure Migrate++
-4. [ ] Open All projects, and open the new project lab@lab.LabInstance.Id-azm
-5. [ ] Cick in ++Start discovery++ and select ++Using custom import++
-6. [ ] click ++Browse++ and paste the following link 
-> ++https://github.com/crgarcia12/migrate-modernize-lab/raw/refs/heads/main/lab-material/Azure-Migrate-Discovery.zip++
-> [+Hint] TODO: It seems this only works in Chrome
-
-## 2. Login to GitHub Enterprise
-Login to Github enterprise: +++https://github.com/enterprises/skillable-events+++
-
-> [!Knowledge] ATENTION!
->
-> Make sure you don't close the GitHub site. Otherwise Copilot might not work
 
 ===
 
 # TODO: Lab start: What are we going to do today?
 
-The objective of the lab is to ... TODO
+The objective of the lab is to TODO
 
-## Part 1: Prepare a migration:
+#### Part 1: Prepare a migration:
 1. An assessment of an on-premises datacenter hyper-v environment using Azure Migrate
-1. Building a Business Case and decide on the next step for one application
+2. Building a Business Case and decide on the next step for one application
+3. Discover what are the benefits of migrating to the cloud, and how to do it
 
-## Part 2: Migrate an application:
+#### Part 2: Migrate an application:
 1. Modernize .NET application |using GitHub Copilot app modernization for .NET.
-1. Build a pipeline to deploy the application to Azure
+
 
 Each part is independent.
-
-===
-@lab.Activity(Question1)
-===
-@lab.Activity(Question2)
-===
-@lab.Activity(Question3)
-
-> [+Hint] Need some help?
-> 
-> Navigate the the business case `buizzcaseevd`
-> Open the Overview page
-> Look at the Potential cost savings card and find the savings
-===
-@lab.Activity(Question4)
-
-> [+Hint] Need some help?
-> 
-> Navigate the the business case `buizzcaseevd`
->
-> On the menu in the left, open `Business Case Reports` and navigate to `Current on-premises vs future`
->
-> Look for Security row, and pay attention at the last column
-
-===
-@lab.Activity(Question5)
-
-> [+Hint] Need some help?
-> 
-> Navigate the the business case `buizzcaseevd`
->
-> On the menu in the left, open `Business Case Reports` and navigate to `Current on-premises vs future`
->
-> Look for Security row, and pay attention at the last column
 
 ===
 # Part 1: Prepare a migration
@@ -130,7 +75,7 @@ Let's now create an Azure Migrate project
 
 1. [ ] Head back to the Azure Portal, and in the serch bar look for ++Azure Migrate++
 2. [ ] Click in ++Create Project++
-3. [ ] Create a new Resource Group. You can call it ++migrate-rg++
+3. [ ] You can use the existent Resource Group, ++on-prem++
 4. [ ] Enter a project name. For example ++migrate-prj++
 5. [ ] Select a region. For example ++Central US++
 
@@ -141,9 +86,10 @@ Let's now create an Azure Migrate project
 2. [ ] Select ++Start discovery++ -> ++Using appliance++ -> ++For Azure++
 3. [ ] Answer the virtualization question with ++Yes, with Hyper-V++
 4. [ ] Select a name for the appliance and click ++Generate key++
-5. [ ] Download the VHD
-6. [ ] Take note of the ++Project key++ (TODO: create a variable)
-7. [ ] Copy and extract the downloaded VHD to the F drive
+5. [ ] Take note of the ++Project key++. You cannot retrieve it agian.
+       You can store it in here: @lab.TextBox(MigrateApplianceKey)
+6. [ ] Copy the Download link by doing right click into the **Download** button and click in Copy Linik. You can then go to the Hyper-V host VM and paste the link in the browser. This will download the VHD . ***Make sure you are doing this inside the Hyper-V VM!***. You can also use this link: ++https://go.microsoft.com/fwlink/?linkid=2191848++
+8. [ ] Copy and extract the downloaded VHD to the F drive
 
 > ![Hyper-V architecture](https://raw.githubusercontent.com/crgarcia12/migrate-modernize-lab/refs/heads/main/lab-material/media/0090.png)
 
@@ -152,6 +98,11 @@ Let's now create an Azure Migrate project
 
 ### Install the Appliance
 1. [ ] Open the Hyper-V manager
+    > [+Hint] How to open Hyper-V manager
+    > In the Server Manager (you can open it in the windows menu) Select `Hyper-V`, right click in your server (number 3) and click in `Hyper-V Manager`
+    >
+    > ![Hyper-V architecture](https://raw.githubusercontent.com/crgarcia12/migrate-modernize-lab/refs/heads/main/lab-material/media/00915.png)
+
 2. [ ] Select ++New++ -> ++Virtual Machine++ (look picture bellow for reference)
 3. [ ] Select a name
 4. [ ] In Location, specify +++F:\Hyper-V\Virtual Machines\appliance+++
@@ -165,7 +116,7 @@ Let's now create an Azure Migrate project
 
 ===
 
-### Configure the appliance
+### Configure the appliance - in progress
 1. [ ] Assign a password for the appliance. You can use +++demo!pass123+++
 2. [ ] Send a **Ctrl+Alt+Del** command and log in into the VM
 
@@ -173,8 +124,9 @@ Let's now create an Azure Migrate project
   	>
   	> ![Hyper-V architecture](https://raw.githubusercontent.com/crgarcia12/migrate-modernize-lab/refs/heads/main/lab-material/media/0093.png)
 
-3. [ ] Paste the Key we got before. This will take several minutes. TODO: Find the variable
-	> [+Hint] If Copy paste does not work
+3. [ ] Paste the Key we got before. This will take several minutes.
+       Your key was: ++@lab.Variable(MigrateApplianceKey)++
+	> [+Hint] If Copy & Paste does not work
   	>
   	> You can type the clipboard in the VM
     > ![Hyper-V architecture](https://raw.githubusercontent.com/crgarcia12/migrate-modernize-lab/refs/heads/main/lab-material/media/0094.png)
@@ -182,20 +134,83 @@ Let's now create an Azure Migrate project
 4. [ ] Follow the instructions to login to your azure account.
 			 Remember that the credentials are in the Resources tab.
 6. [ ] In step 2, provide Hyper-V host credentials. 
-    > username: +++AdminUSer+++
+    > username: +++adminuser+++
     > password: +++demo!pass123+++
-    > 
 
+===
+
+Doing an assessment can take time. That is why we have run an assessment in other servers for you.
+1. [ ] Go to the Azure Portal, and open the already prepared project: ++lab@lab.LabInstance.Id-azm++
+
+![Hyper-V architecture](https://raw.githubusercontent.com/crgarcia12/migrate-modernize-lab/refs/heads/main/lab-material/media/0095.png)
+
+===
+
+
+Doing an assessment can take time. That is why we have run an assessment in other servers for you.
+1. [ ] Go to the Azure Portal, and open the already prepared project: ++lab@lab.LabInstance.Id-azm++
+
+![Hyper-V architecture](https://raw.githubusercontent.com/crgarcia12/migrate-modernize-lab/refs/heads/main/lab-material/media/0095.png)
 
 
 ===
 
-TODO: How to analyze the data!
+question in progress
 
-How do we plan what to migrate?
+@lab.Activity(Question1)
+===
 
-Lets pick AirSonic, and I willteach you how to plan the migration
+question in progress
 
+@lab.Activity(Question2)
+
+===
+
+question in progress
+
+@lab.Activity(Question3)
+
+> [+Hint] Need some help?
+> 
+> Navigate the the business case `buizzcaseevd`
+> Open the Overview page
+> Look at the Potential cost savings card and find the savings
+===
+
+question in progress
+
+@lab.Activity(Question4)
+
+> [+Hint] Need some help?
+> 
+> Navigate the the business case `buizzcaseevd`
+>
+> On the menu in the left, open `Business Case Reports` and navigate to `Current on-premises vs future`
+>
+> Look for Security row, and pay attention at the last column
+
+===
+
+question in progress
+
+@lab.Activity(Question5)
+
+> [+Hint] Need some help?
+> 
+> Todo: Some help here
+>
+> 
+
+===
+
+# Excersise 2: Analysis
+
+
+Press Next to continue.
+===
+The first step in a migration, is to make sure we have clean data.
+
+In a real 
 Go to the already created lab
 Explore assessment
 Look at 6R
@@ -316,3 +331,6 @@ Lets now find out if we can host it in a modern PaaS service
        Notice that the report can be exported and shared with other developers in the top right corner
 4. Now, let's run the Mandatory Issue: Windows Authenticatio. Click in `Run Task`
 > !IMAGE[0080.png](https://raw.githubusercontent.com/crgarcia12/migrate-modernize-lab/refs/heads/main/lab-material/media/0080.png)
+
+
+
