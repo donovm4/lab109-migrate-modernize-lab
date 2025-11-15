@@ -2,10 +2,10 @@
 
 ## Welcome @lab.User.FirstName! 
 
-Let's familiarize with the lab environment.
-In the top you will have two tabs **Instructions** and **Resources**
+Let's familiarize yourself with the lab environment.
+At the top you will have two tabs: **Instructions** and **Resources**
 
-In Resource you will find useful information like credentials and links. You can always go back and forth between them
+In Resources you will find useful information like credentials and links. You can switch between them at any time.
 
 
 Now, let's begin. Log into the virtual machine using the following credentials: 
@@ -14,76 +14,76 @@ Password: +++@lab.VirtualMachine(Win11-Pro-Base).Password+++
 
 ===
 
-# TODO: Lab start: What are we going to do today?
+# Lab Overview: What are we going to do today?
 
-The objective of the lab is to explore the different steps involved in a real life migration
+The objective of this lab is to explore the different steps involved in a real-life migration
 
-#### Excercise 1: Prepare a migration:
-1. We will learn how to install an appliance that will collect data from an on-prem datacenter using Azure Migrate
+#### Exercise 1: Prepare a migration:
+1. Learn how to install an appliance that collects data from an on-premises datacenter using Azure Migrate
 
-#### Excercise 2: Migrate an application:
-1. We will learn how to build a Business Case and decide on the next step when planning a migration
+#### Exercise 2: Analyze migration data and build a business case:
+1. Learn how to build a Business Case and decide on the next step when planning a migration
 
-#### Excercise 3: Migrate an .NET application:
+#### Exercise 3: Migrate a .NET application:
 1. Modernize a .NET application using GitHub Copilot and deploy it to Azure.
 
 #### Exercise 4: Migrate a Java application:
 1. Modernize a Java application using GitHub Copilot and deploy it to Azure.
 
 
-Each excersise is independent. If you get stucked in any of them, you can procede to the next one
+Each exercise is independent. If you get stuck in any of them, you can proceed to the next one
 
 ===
-# Excersie 1: Prepare a migration
+# Exercise 1: Prepare a migration
 
-Click Next to start the excersise
+Click Next to start the exercise
 
 ===
 ### Understand our lab environment
 
-The lab simulates a datacenter, by having a VM hosting server, and several VMs inside simulating different applications
+The lab simulates a datacenter by having a VM hosting server with several VMs inside simulating different applications
 
-1. [ ] Open Edge, and head to the Azure Portal using the following link. This link enables some of the preview features we will need later on: ++https://aka.ms/migrate/disconnectedAppliance++ TODO: this link does not work
-1. [ ] Login using the credentials in the Resources tab. Notice that instead of using the Password, you are probably going to be requested to use the Temporary Access Password (TAP)
+1. [ ] Open Edge and navigate to the Azure Portal using the following link. This link enables some preview features we will need later: ++https://aka.ms/migrate/disconnectedAppliance++ TODO: this link does not work
+1. [ ] Login using the credentials in the Resources tab. Instead of using the Password, you may be requested to use the Temporary Access Password (TAP)
 
-> [+Hint] Troubles finding the resource tab?
+> [+Hint] Trouble finding the Resources tab?
 >
-> Navigate to the top right corner of this screen, in there you can always find the credentials and important information
+> Navigate to the top right corner of this screen where you can always find the credentials and important information
 > ![text to display](https://raw.githubusercontent.com/crgarcia12/migrate-modernize-lab/refs/heads/main/lab-material/media/0010.png)
 
-1. [ ] Open the list of resource groups. You will find on called `on-prem`
+1. [ ] Open the list of resource groups. You will find one called `on-prem`
 2. [ ] Explore the resource group. Find a VM called `lab@lab.LabInstance.Id-vm`
-3. [ ] Open the VM. Click in `Connect`. Wait until the page is fullo loaded
-4. [ ] Click in `Download RDP file` wait until the download is complete and open it
+3. [ ] Open the VM. Click **Connect**. Wait until the page is fully loaded
+4. [ ] Click **Download RDP file**, wait until the download completes and open it
 5. [ ] Login to the VM using the credentials
     1. [ ] Username: `adminuser`
     2. [ ] Password: `demo!pass123`
 
 
-You have now loged in into your on-premises server!
-Let's explore whats inside in the next chapter
+You have now logged into your on-premises server!
+Let's explore what's inside in the next chapter
 
 ===
 ### Understand our lab environment: The VM
 
-This Virtual machine represents an on-premises server.
+This virtual machine represents an on-premises server.
 It has nested virtualization. Inside you will find several VMs.
 
 > ![Screenshot](https://raw.githubusercontent.com/crgarcia12/migrate-modernize-lab/refs/heads/main/lab-material/media/0020.png)
 
-In the windows menu, open the `Hyper-V Manager` to discover the inner VMs.
+In the Windows menu, open the `Hyper-V Manager` to discover the inner VMs.
 
-TODO: Open one of the vms and see the application running
+TODO: Open one of the VMs and see the application running
 
-We will now create another VM, and install the Azure Migrate Appliance
+We will now create another VM and install the Azure Migrate Appliance
 
 ===
 ### Create Azure Migrate Project
 Let's now create an Azure Migrate project
 
-1. [ ] Head back to the Azure Portal, and in the serch bar look for +++Azure Migrate+++
-2. [ ] Click in ++Create Project++
-3. [ ] Use the existent Resource Group, +++on-prem+++
+1. [ ] Go back to the Azure Portal and in the search bar look for +++Azure Migrate+++
+2. [ ] Click **Create Project**
+3. [ ] Use the existing Resource Group: +++on-prem+++
 4. [ ] Enter a project name. For example +++migrate-prj+++
 5. [ ] Select a region. For example +++@lab.CloudResourceGroup(on-prem).Location+++
 
@@ -91,7 +91,7 @@ Let's now create an Azure Migrate project
 ===
 ### Download the Appliance
 
-Todo: Explain what is the appliance, and what we are doing
+TODO: Explain what the appliance is and what we are doing
 
 
 1. [ ] Once in the Azure Migrate Project portal
@@ -112,26 +112,24 @@ In the Discover page
 
 1. [ ] Select **Yes, with Hyper-V** in the dropdown
 1. [ ] Enter a name for the appliance. For example +++lab-appliance+++ and click **Generate key**
-1. [ ] Take note of the **Project key**. You cannot retrieve it agian.
-       You can store it in here: @lab.TextBox(MigrateApplianceKey)
+1. [ ] Take note of the **Project key**. You cannot retrieve it again.
+       You can store it here: @lab.TextBox(MigrateApplianceKey)
 
 1. [ ] Select **VHD file**    
-2. [ ] You need to download the appliance VHD, but **inside your on-prem server**. 
+2. [ ] You need to download the appliance VHD **inside your on-premises server**. 
 
-	Copy the Download link by doing right click into the **Download** button and click in Copy Linik. 
+	Copy the download link by right-clicking the **Download** button and clicking **Copy Link**. 
 
 ===
 ### Extract the Appliance
 
 1. [ ] Go back to the Hyper-V host VM. This is where you have the Hyper-V Manager with the list of all VMs.
 
+3. [ ] Open the browser and paste the link. This will download the VHD. 
 	
+    ***Make sure you are doing this inside the Hyper-V VM!*** You can also use this link: +++https://go.microsoft.com/fwlink/?linkid=2191848+++
 
-3. [ ] Open the browser and paste the link. This will download the VHD . 
-	
-    ***Make sure you are doing this inside the Hyper-V VM!***. You can also use this link: +++https://go.microsoft.com/fwlink/?linkid=2191848+++
-
-6. [ ] Copy and downloaded file to the F drive, and then extract its content
+6. [ ] Copy the downloaded file to the F drive and extract its contents
 
 > [+Hint] Screenshot
 >
@@ -152,22 +150,22 @@ In the Discover page
     >
 	> ![Screenshot](https://raw.githubusercontent.com/crgarcia12/migrate-modernize-lab/refs/heads/main/lab-material/media/0092.png)
 
-1. [ ] Click **Next** and insert a Name. For example, +++AZMAppliance+++
-1. [ ] Click **Store the virtual machine in a different location**, and specify +++F:\Hyper-V\Virtual Machines\appliance+++
+1. [ ] Click **Next** and enter a name. For example, +++AZMAppliance+++
+1. [ ] Click **Store the virtual machine in a different location** and specify +++F:\Hyper-V\Virtual Machines\appliance+++
 1. [ ] Use **Generation 1** and click **Next**
-1. [ ] Select +++16384+++ MB of RAM and click Next
-1. [ ] In **Connection**, select ++NestedSwitch++ and click Next
+1. [ ] Select +++16384+++ MB of RAM and click **Next**
+1. [ ] In **Connection**, select ++NestedSwitch++ and click **Next**
 1. [ ] Select **Use an existing virtual hard drive** 
-1. [ ] click in **Browse** and look for the extracted zip file in the **F:\\** drive.
+1. [ ] Click **Browse** and look for the extracted zip file on the **F:\\** drive.
 
     > [+Hint] Create virtual machine
     >
 	> ![Screenshot](https://raw.githubusercontent.com/crgarcia12/migrate-modernize-lab/refs/heads/main/lab-material/media/00925.png)
 
-1. [ ] Click Finish, and start the new VM by doing right click **Start** 
-1. [ ] Double click in the VM to open a Remote Desktop to it. Initially, it will have a back scree for several minutes until it starts
+1. [ ] Click **Finish** and start the new VM by right-clicking and selecting **Start** 
+1. [ ] Double-click the VM to open a Remote Desktop connection to it. Initially, it will have a black screen for several minutes until it starts
 
-You have now an appliance up and running in your server. This appliance will scan all the VMs and collect all neded information to be able to plan a migration. Now, we need to configure the appliance in order it is able to run a scan on the environment
+You now have an appliance up and running on your server. This appliance will scan all the VMs and collect all needed information to plan a migration. Now, we need to configure the appliance so it can run a scan on the environment
 
 
 ===
@@ -176,9 +174,9 @@ You have now an appliance up and running in your server. This appliance will sca
 
 We will now configure the appliance.
 
-1. [ ] Start by accepting the License terms
+1. [ ] Start by accepting the license terms
 1. [ ] Assign a password for the appliance. Use +++Demo!pass123+++
-1. [ ] Send a **Ctrl+Alt+Del** command and log in into the VM
+1. [ ] Send a **Ctrl+Alt+Del** command and log into the VM
 
 	> [+Hint] Do you know how to send Ctrl+Alt+Del to a VM?
   	>
@@ -188,16 +186,16 @@ We will now configure the appliance.
 
 ### Connect the appliance to Azure Migrate
 
-Once we login, the machine will configure itself. Wait until the browser displays the Azure Migrate Appliance Configuration. This will take about 4 minutes
+Once we log in, the machine will configure itself. Wait until the browser displays the Azure Migrate Appliance Configuration. This will take about 4 minutes
 
-1. [ ] Agree to the Term of use and wait until it checks the connectivity to Azure
+1. [ ] Agree to the terms of use and wait until it checks connectivity to Azure
 	> [+Hint] Screenshot
   	>
   	> ![Screenshot](https://raw.githubusercontent.com/crgarcia12/migrate-modernize-lab/refs/heads/main/lab-material/media/00932.png)
 
-1. [ ] Paste the Key we got while creating the Appliance into the Azure Portal, and click **Verify**. 
+1. [ ] Paste the key we obtained while creating the appliance in the Azure Portal and click **Verify**. 
 
-   During this process, the appliance software is updated. This will take several minutes and will require to **refresh** the page.
+   During this process, the appliance software is updated. This will take several minutes and will require you to **refresh** the page.
 
     > [+Hint] Your key was: 
     > ++@lab.Variable(MigrateApplianceKey)++
@@ -216,16 +214,16 @@ Once we login, the machine will configure itself. Wait until the browser display
     > ![Screenshot](https://raw.githubusercontent.com/crgarcia12/migrate-modernize-lab/refs/heads/main/lab-material/media/00945.png)
 
 
-You have now connected the Appliance to your Azure Migrate project. In the next steps we will provide credentials for the appliance to be able to scan your Hyper-V environment
+You have now connected the appliance to your Azure Migrate project. In the next steps we will provide credentials for the appliance to scan your Hyper-V environment
 
 ===
 
 ### Configure the appliance
 
-Once the appliance finishes Registering, you will be able to see it in the Azure Portal, but still it cannot scan your servers because it does not have a way to authenticate.
+Once the appliance finishes registering, you will be able to see it in the Azure Portal, but it still cannot scan your servers because it doesn't have authentication credentials.
 We will now provide Hyper-V host credentials. The appliance will use these credentials to scan Hyper-V and discover all servers
 
-1. [ ] In step 2 **Manage credentials and discovery sources**, click in **Add credentials**
+1. [ ] In step 2 **Manage credentials and discovery sources**, click **Add credentials**
 
     username: +++adminuser+++
     
@@ -234,14 +232,14 @@ We will now provide Hyper-V host credentials. The appliance will use these crede
     ![Screenshot](https://raw.githubusercontent.com/crgarcia12/migrate-modernize-lab/refs/heads/main/lab-material/media/00946.png)
 
 
-1. [ ] click in **Add discovery source** and add the IP address of the Hyper-V host: +++172.100.2.1+++
+1. [ ] Click **Add discovery source** and add the IP address of the Hyper-V host: +++172.100.2.1+++
 
     > [+Hint] Hint
     >
 	>![Screenshot](https://raw.githubusercontent.com/crgarcia12/migrate-modernize-lab/refs/heads/main/lab-material/media/00947.png)
     >![Screenshot](https://raw.githubusercontent.com/crgarcia12/migrate-modernize-lab/refs/heads/main/lab-material/media/00948.png)
 
-1. [ ] We are almost there! Now we need to add credentials to analyze the software inside the VMs, and the databases asociated to the applications. Add credentials for Windows (Non-domain), Linux (Non-domain), SQL Server and PostreSQL Server
+1. [ ] We're almost there! Now we need to add credentials to analyze the software inside the VMs and the databases associated with the applications. Add credentials for Windows (Non-domain), Linux (Non-domain), SQL Server and PostgreSQL Server
 
 	username: +++adminuser+++
 
@@ -253,21 +251,21 @@ We will now provide Hyper-V host credentials. The appliance will use these crede
     >![Screenshot](https://raw.githubusercontent.com/crgarcia12/migrate-modernize-lab/refs/heads/main/lab-material/media/009491.png)
 
 
-1. [ ] Click in **Start discovery**
+1. [ ] Click **Start discovery**
 1. [ ] Close the VM, we are going back to the Azure portal
 
 ===
 
-### Validate the Appliance is running
-The appliance will start collecting data, and sending it to your Azure Migrate project.
+### Validate the appliance is running
+The appliance will start collecting data and sending it to your Azure Migrate project.
 
-1. [ ] Close the virtual machine, and go back to the Azure Portal
-2. [ ] Search for **Azure Migrate** -> **All projects** and open your project. If you followed the naming of this guide, it should be called **migrate-prj**
+1. [ ] Close the virtual machine and go back to the Azure Portal
+2. [ ] Search for **Azure Migrate** -> **All projects** and open your project. If you followed the naming guide, it should be called **migrate-prj**
 	> [+Hint] Screenshot
     >
 	>![Screenshot](https://raw.githubusercontent.com/crgarcia12/migrate-modernize-lab/refs/heads/main/lab-material/media/0095.png)
 
-4. [ ] In the left panel, find **Manage** -> **Appliance** and open the appliance you have configured.
+4. [ ] In the left panel, find **Manage** -> **Appliance** and open the appliance you configured.
 
 	> [+Hint] Screenshot
     >
@@ -281,17 +279,17 @@ The appliance will start collecting data, and sending it to your Azure Migrate p
 
 ===
 
-Doing an assessment takes time. In order to get data we need to run the appliance for hours.
+Performing an assessment takes time. To get data we need to run the appliance for hours.
 
-In real life scenarios, it is better to keep it running for several days. This way Azure Migrate will have a better understanding on the application resources requirements, and will be able to provide better recommendations in term of sizings.
+In real-life scenarios, it's better to keep it running for several days. This way Azure Migrate will have a better understanding of application resource requirements and will be able to provide better sizing recommendations.
 
-Since we don't have all this time now. We have prepared another Azure Migrate project with data already populated for you.
+Since we don't have all this time now, we have prepared another Azure Migrate project with data already populated for you.
 
 ===
 
-# Excersise 2: Analize the data and prepare a business case
+# Exercise 2: Analyze migration data and build a business case
 
-Todo: In this excersise we will review the process of analyzing the collected data and make some conclusions
+TODO: In this exercise we will review the process of analyzing the collected data and make some conclusions
 
 ===
 
