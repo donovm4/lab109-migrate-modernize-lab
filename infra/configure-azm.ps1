@@ -6,7 +6,7 @@
 
 $SkillableEnvironment = $true
 $EnvironmentName = "crgmig5" # Set your environment name here for non-Skillable environments
-$ScriptVersion = "11.0.0"
+$ScriptVersion = "12.0.0"
 
 ######################################################
 ##############   INFRASTRUCTURE FUNCTIONS   #########
@@ -50,7 +50,7 @@ function Get-AuthenticationHeaders {
     }
 }
 
-function Get-Location {
+function Get-AzureRegion {
     param(
         [string]$SubscriptionId,
         [string]$ResourceGroupName,
@@ -1279,7 +1279,7 @@ function Invoke-AzureMigrateConfiguration {
     $masterSiteName = "${EnvironmentName}mastersite"
     
     # Get the location for all operations
-    $location = Get-Location -SubscriptionId $subscriptionId -ResourceGroupName $resourceGroupName -MigrateProjectName $migrateProjectName -IsSkillableEnvironment $SkillableEnvironment
+    $location = Get-AzureRegion -SubscriptionId $subscriptionId -ResourceGroupName $resourceGroupName -MigrateProjectName $migrateProjectName -IsSkillableEnvironment $SkillableEnvironment
     
     # Log all variable values
     Write-LogToBlob "===============================  VARIABLES ================================"
