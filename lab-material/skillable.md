@@ -36,6 +36,18 @@ Each exercise is independent. If you get stuck in any of them, you can proceed t
 ===
 # Exercise 1: Prepare a migration
 
+**Goals:**
+- Understand how Azure Migrate works in a simulated datacenter environment
+- Learn to create and configure an Azure Migrate project
+- Install and configure an Azure Migrate appliance for data collection
+- Connect the appliance to your on-premises environment for discovery
+- Validate that the appliance is successfully collecting data from your infrastructure
+
+## Overview
+Migration preparation is the foundation of any successful cloud migration. This exercise teaches you how to set up Azure Migrate to discover and assess your on-premises environment. You'll work with a simulated datacenter containing multiple VMs running different applications.
+
+**Why this matters:** Proper discovery and data collection are essential for accurate migration planning. Without good data, you cannot make informed decisions about what to migrate, when to migrate it, and how much it will cost.
+
 Click Next to start the exercise
 
 ===
@@ -295,158 +307,195 @@ Since we don't have all this time now, we have prepared another Azure Migrate pr
 
 # Exercise 2: Analyze migration data and build a business case
 
-Once we have the appliance running in all our Hyper-V, VMWare or phisical servers, all the data is collected and agregated continuously
-Now is time to take a closer look and decide what is going to be our next step.
+**Goals:**
+- Understand how to review and clean migration data for accuracy
+- Learn to group VMs into applications for better migration planning
+- Create and analyze a business case to justify migration investments
+- Evaluate technical readiness and migration strategies using assessments
 
-1. [ ] Go to the Azure Portal, and open the already prepared project: ++lab@lab.LabInstance.Id-azm++
+## Overview
+After the Azure Migrate appliance has been running and collecting data from your on-premises environment, you need to analyze this data to make informed migration decisions. This exercise teaches you how to prepare clean data, build business cases, and perform technical assessments.
+
+**Why this matters:** Clean data and proper analysis are critical for successful migration planning. Business cases help justify investments, while assessments ensure technical feasibility.
+
+1. [ ] Go to the Azure Portal and open the already prepared project: ++lab@lab.LabInstance.Id-azm++
 
 ![Screenshot](https://raw.githubusercontent.com/crgarcia12/migrate-modernize-lab/refs/heads/main/lab-material/media/0095.png)
-
-
 
 ===
 # Prepare your data
 
-To be able to take a good informed decision, we need clean accurate data.
-The appliance will try to collect data from all servers, but there can be problems.
-The first step is to look for problems and issues that require our attention.
+To make informed decisions, you need good quality data. The appliance collects data continuously, but issues can occur that require your attention.
+
+Let's check if there are any issues with the collected data:
 
 1. [ ] Open the Azure Migrate project overview
-1. [ ] Open the Action center blade from the pannel in the left.
+2. [ ] Open the **Action center** blade from the panel on the left
 
-You will find several issues, like VMs that are turned off or VMs that the appliance could not connect to due to worng credentials
+You will find several issues, such as:
+- VMs that are powered off
+- VMs that the appliance could not connect to due to incorrect credentials
+- Missing performance data
 
-In a real world scenario, we should try to fix all the issues at this stage to improve our data accuracy.
-For the purpose of this excersise we will move on
+In a real-world scenario, you should resolve all issues to improve data quality. For this exercise, we will proceed with the available data.
 
 ===
 # Create Applications
 
-Once the workload data is clean, we will group the VMs into applications to be able to identify what should be moved together.
-We will do this excersise for Contoso University applciation
+Once your workload data is clean, group VMs into applications to identify what should be migrated together. This helps ensure application dependencies are maintained during migration.
 
-1. [ ] Expand the Explore appliacions group in the left pannel
-2. [ ] Open the Applications page
-3. [ ] Click in Define application -> New application
-4. [ ] In Name, enter +++ContosoUniversity+++
-5. [ ] In Type, select **Custom**, meaning we have the source code
-6. [ ] In Workloads, Find all the +++ContosoUniversity+++ workloads by using the filter nad select them all
+**Why this step matters:** Migrating related components together reduces risk and ensures applications continue to function properly in Azure.
+
+Let's create an application definition for Contoso University:
+
+1. [ ] Expand the **Explore applications** group in the left panel
+2. [ ] Open the **Applications** page
+3. [ ] Click **Define application** → **New application**
+4. [ ] In **Name**, enter +++ContosoUniversity+++
+5. [ ] In **Type**, select **Custom** (meaning we have access to the source code)
+6. [ ] In **Workloads**, find all the +++ContosoUniversity+++ workloads using the filter and select them all
     
-    > [+Hint] Hint
+    > [+Hint] T
     >
 	>![Screenshot](https://raw.githubusercontent.com/crgarcia12/migrate-modernize-lab/refs/heads/main/lab-material/media/01002.png)
-7. [ ] In Properties, select any criticality and complexity, and createthe application
+7. [ ] In **Properties**, select any criticality and complexity, then create the application
 
 
 ===
 # Build a Business Case
-We now have data of all VMs, and we have group them into Applications. Time to create a business case.
 
-The Business case helps you understand where Azure can bring the most value to your organization by estimating total cost of ownership (TCO), potential savings, and sustainability impact for your applications and workloads.
+**Goal:** Create a financial justification for your migration project
 
-1. [ ] In the** Decide and plan** tab, open **Business cases**
-       You will notice that there are business cases already created, omit that for now
-2. [ ] Click in **Build business case**
-
-You can create two types of business case. You can either create a business case for all your workloads, or if you know what aplications you are interested now, you can scope them.
-For this example, we will do the second and create a business case only for the Contoso University application we just created.
+A business case helps you understand where Azure brings the most value by estimating Total Cost of Ownership (TCO), potential savings, and sustainability impact for your applications and workloads.
 
 
-3. [ ] Type a name for the business case. For example +++Contoso University+++
+
+1. [ ] In the **Decide and plan** tab, open **Business cases**
+   You will notice there are business cases already created - we'll ignore those for now
+2. [ ] Click **Build business case**
+
+You can create business cases for all workloads or scope them to specific applications. For this example, we'll create a scoped business case for the Contoso University application.
+
+3. [ ] Type a name for the business case: +++Contoso University+++
 4. [ ] Select **Selected Scope**
-5. [ ] Click in **Add applications**
-6. [ ] Select **ContosoUniversity** application, then click **Next**
-7. [ ] Select **West US 2**
-8. [ ] IF your company has an special discount on Azure, you can insert it in this screen as well. Let's add a 15% discount
+5. [ ] Click **Add applications**
+6. [ ] Select the **ContosoUniversity** application, then click **Next**
+7. [ ] Select **West US 2** as the target region
+8. [ ] Add a 15% Azure discount (simulate enterprise agreements)
 9. [ ] Click **Build business case**
 
-Building the business case takes some minutes. We will not wait, we can go and grab a Business Case that is already created
+You can create several business cases for different scenarios, like rehosting vs refactoring, or considering different applications.
+
+Building the business case takes several minutes. While we wait, let's examine a pre-built business case.
 
 ===
-Lets open an existent business case to analyze the results
-In this case, we will take a business case with focus in Modernization where the scope is the entire datacenter instead of only one application
+
+# Analyze an Existing Business Case
+
+Let's examine a completed business case focused on modernization for the entire datacenter to understand how to interpret business case results and identify savings opportunities
+
 1. [ ] Expand **Decide and Plan** and open **Business cases** in the left panel
-2. [ ] Enter in there **businesscase-for-paas**
+2. [ ] Open the **businesscase-for-paas** business case
 
-The first tile will display the estimated on-premises vs cloud cost, and a pottential cost saving.
-Do you know how are on-prem costs calculated?
-1. [ ] Hoover over the i icon and learn more about this
-2. [ ] One tile bellow we can see that this business is based on 40 VMs, of which 13 are Linux
-3. [ ] We can also note that there are 22 unique webapps and 6 databases across all those servers.
+## Key Metrics Analysis
 
-The Saving in case we move to Azure, would be of 212.3K USD. 
+The overview shows several important metrics:
 
-Where is that saving coming from? Let's dig into that
+**Cost Comparison:**
+- The first tile displays estimated on-premises vs Azure costs and potential savings
+- Hover over the information icon to learn how on-premises costs are calculated
 
-===
+**Infrastructure Summary:**
+- This business case analyzes 40 VMs (13 Linux, 27 Windows)
+- Identifies 22 unique web applications and 6 databases
+- Shows potential savings of $212.3K USD annually
 
-1. [ ] Expand **Business Case Reports** and open the **Current on-premises vs future** page
-2. [ ] Scroll to the table bellow and check the **Compute and licensing** cost savings.
-3. [ ] Keep scrolling until the end of the page. In there you can also find the estimated Carbon Dioxide savings
+**Understanding the Savings:**
+Let's explore where these savings come from:
 
-In the next page, **Migration Strategies** you can find more information on the licensing costs, the Hybrid benefits.
-Feel free to explore the business case further
+1. [ ] Expand **Business Case Reports** and open **Current on-premises vs future**
+2. [ ] Scroll to the table below and review the **Compute and licensing** cost savings
+3. [ ] Continue scrolling to see the estimated Carbon Dioxide emissions reduction
 
-The last page of the Business Case is **Azure cost**. This is where you can edit all the parameters acording to your case, to get more acurate values
+## Migration Strategies
 
-You can also check the status of the business case you created for ContosoUniversity in case it finished calculating. If not, we can come back afterwards
+1. [ ] Navigate to the **Migration Strategies** page
 
-===
+This report maps your workloads to Gartner's 6R migration strategies:
+- **Rehost:** Lift and shift to Azure VMs
+- **Replatform:** Move to managed services (e.g., Azure SQL Managed Instance)
+- **Refactor:** Modernize to PaaS services (e.g., Azure App Service)
 
-# Assessment
+The page shows licensing costs and Azure Hybrid Benefit opportunities.
 
-Once we understand the financial implications of moving to the cloud, we can take a look at it form a technical point of view.
+## Azure Cost Assumptions
 
-An Azure Migrate assessment evaluates your workloads hosted on your on-premises datacenter or other public clouds for migration to Azure. Each Azure Migrate assessment analyzes your source workloads for:
+1. [ ] Navigate to the **Azure cost** page
 
-**Migration strategy:** It is a strategy to migrate all the workloads that constitute an application. The strategy is aimed at efficiently migrating all the constituent workloads, which can be a combination of application servers, web apps, databases etc. to Azure.
+Here you can adjust parameters to get more accurate estimates:
+- Target regions
+- Discount percentages  
+- Migration timeline
+- Performance comfort factors
 
-**Readiness:** Suitability of source workloads for all valid target Azure services.
-
-**Right-sized targets:** The recommended targets are right-sized based on compute and storage performance requirements to optimize for resiliency and cost.
-
-**Azure resource cost:** It is the total resource cost for hosting all the targets on Azure.
-Migration tool: It is the recommended tool for migrating the source to the recommended target.
-
-===
-
-# Assessment
-
-1. [ ] Expand **Decide and plan** and open the Assessment page
-2. [ ] Open the assessment called **businesscase-businesscase-for-paas**.<br />
-       This assessment is created automatically when you create a business case.
-3. [ ] Look at the **Recommended path**: PaaS preferred.
-4. [ ] 
+Feel free to explore the business case further. You can also check if your ContosoUniversity business case has finished calculating.
 
 ===
-How many Linux VMs are power off? Answer 3 + 01001.png
-How many Windows 2016 servers have we discovered? Answer 5 + 01004.png
+# Technical Assessment
 
+**Goal:** Evaluate technical readiness and migration complexity for your workloads
 
+While business cases focus on financial aspects, assessments evaluate technical readiness for migration. They analyze workloads for migration strategy, Azure readiness, right-sized targets, and costs.
 
-Todo:
+**Why assessments matter:** They ensure your workloads are technically ready for Azure and help you choose the right migration approach and Azure services.
 
-Look at All Inventory
-Create Applications
-Business case
-Assessments
-Software
-Insights
-Wave planning
+## Assessment Components
 
+Azure Migrate assessments evaluate your workloads for:
 
-The first step in a migration, is to make sure we have clean data.
+- **Migration strategy:** The best approach to migrate application components (rehost, replatform, refactor)
+- **Readiness:** Suitability of source workloads for specific Azure services
+- **Right-sized targets:** Optimal Azure services based on performance requirements and cost
+- **Azure resource cost:** Total cost for hosting workloads on Azure
+- **Migration tools:** Recommended tools for each migration type
 
-In a real 
-Go to the already created lab
-Explore assessment
-Look at 6R
-- Software
-	Tagging example
-	Vulnerabilities
+## Review an Existing Assessment
 
+1. [ ] Expand **Decide and plan** and open the **Assessments** page
+2. [ ] Open the assessment called **businesscase-businesscase-for-paas**
+   (This assessment is automatically created when you build a business case)
+3. [ ] Review the **Recommended path**: Notice it shows "PaaS preferred"
+4. [ ] Explore the different tabs to see:
+   - **Azure readiness** for each server
+   - **Cost details** broken down by service type
+   - **Monthly cost estimates** for running workloads in Azure
 
-Explore business case
+## Key Assessment Insights
+
+The assessment provides detailed technical analysis that complements the business case financial analysis. Together, they give you a complete picture for migration planning.
+
+> **Note:** You can create specific assessments for individual applications or server groups to get more detailed technical recommendations. 
+
+===
+# Exercise 2 Summary
+
+**What you accomplished:**
+
+1. ✅ **Data Quality:** Learned to identify and address data collection issues that could impact migration planning
+2. ✅ **Application Grouping:** Created logical application definitions to ensure coordinated migration of related components  
+3. ✅ **Business Case:** Built financial justification showing potential cost savings, TCO, and ROI for migration
+4. ✅ **Technical Assessment:** Evaluated workload readiness and identified optimal Azure services and migration strategies
+
+**Key Takeaways:**
+- Clean, accurate data is essential for reliable migration planning
+- Business cases provide the financial justification needed to secure migration funding
+- Technical assessments ensure your applications are ready for Azure and help choose the right services
+- Combining financial and technical analysis gives you a complete migration strategy
+
+**Next Steps:**
+You now have the foundation for informed migration decisions. In the following exercises, you'll put this knowledge into practice by modernizing actual applications using GitHub Copilot.
+
+===
 
 ===
 
