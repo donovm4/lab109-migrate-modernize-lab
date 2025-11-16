@@ -312,7 +312,7 @@ Since we don't have all this time now, we have prepared another Azure Migrate pr
 - Evaluate technical readiness and migration strategies using assessments
 
 ## Overview
-After the Azure Migrate appliance has been running and collecting data from your on-premises environment, you need to analyze this data to make informed migration decisions. This exercise teaches you how to prepare clean data, build business cases, and perform technical assessments.
+Your appliance has been collecting data from the on-premises environment. Now it's time to analyze this data and make migration decisions. You'll clean the data, group VMs into applications, build a business case, and perform technical assessments.
 
 1. [ ] Go to the Azure Portal and open the already prepared project: ++lab@lab.LabInstance.Id-azm++
 
@@ -321,19 +321,17 @@ After the Azure Migrate appliance has been running and collecting data from your
 ===
 # Prepare your data
 
-To make informed decisions, you need good quality data. The appliance collects data continuously, but issues can occur that require your attention.
-
-Let's check if there are any issues with the collected data:
+Your appliance collects data continuously, but some VMs may have issues that need attention.
 
 1. [ ] Open the Azure Migrate project overview
 2. [ ] Open the **Action center** blade from the panel on the left
 
-You will find several issues, such as:
+Common issues you'll see:
 - VMs that are powered off
-- VMs that the appliance could not connect to due to incorrect credentials
+- Connection failures due to wrong credentials  
 - Missing performance data
 
-In a real-world scenario, you should resolve all issues to improve data quality. For this exercise, we will proceed with the available data.
+In production, fix these issues for better accuracy. For this lab, we'll work with what we have.
 
 > [+Hint] Screenshot
 >
@@ -342,16 +340,16 @@ In a real-world scenario, you should resolve all issues to improve data quality.
 ===
 # Create Applications
 
-Once your workload data is clean, group VMs into applications to identify what should be migrated together. This helps ensure application dependencies are maintained during migration.
+Group related VMs into applications so they migrate together. This prevents breaking dependencies between components.
 
-Let's create an application definition for Contoso University:
+Let's create an application for Contoso University:
 
-1. [ ] Expand the **Explore applications** group in the left panel
+1. [ ] Expand **Explore applications** in the left panel
 2. [ ] Open the **Applications** page
-3. [ ] Click **Define application** → **New application**
+3. [ ] Click **Define application** -> **New application**
 4. [ ] In **Name**, enter +++ContosoUniversity+++
-5. [ ] In **Type**, select **Custom** (meaning we have access to the source code)
-6. [ ] In **Workloads**, find all the +++ContosoUniversity+++ workloads using the filter and select them all
+5. [ ] In **Type**, select **Custom** (we have source code access)
+6. [ ] In **Workloads**, filter for +++ContosoUniversity+++ and select all results
     
     > [+Hint] Screenshot
     >
@@ -362,102 +360,85 @@ Let's create an application definition for Contoso University:
 ===
 # Build a Business Case
 
-A business case helps you understand where Azure brings the most value by estimating Total Cost of Ownership (TCO), potential savings, and sustainability impact for your applications and workloads. 
+A business case shows the financial value of migrating to Azure. It calculates costs, savings, and environmental benefits.
 
-1. [ ] In the **Decide and plan** tab, open **Business cases**
-   You will notice there are business cases already created - we'll ignore those for now
+1. [ ] In **Decide and plan**, open **Business cases**
 2. [ ] Click **Build business case**
 
-You can create business cases for all workloads or scope them to specific applications. For this example, we'll create a scoped business case for the Contoso University application.
+Create a targeted business case for Contoso University:
 
-3. [ ] Type a name for the business case: +++contosouniversity+++
+3. [ ] Name: +++contosouniversity+++
 4. [ ] Select **Selected Scope**
 5. [ ] Click **Add applications**
-6. [ ] Select the **ContosoUniversity** application, then click **Next**
-7. [ ] Select **West US 2** as the target region
-8. [ ] Add a 15% Azure discount (simulate enterprise agreements)
+6. [ ] Select **ContosoUniversity**, then click **Next**
+7. [ ] Choose **West US 2** as target region
+8. [ ] Add **15%** Azure discount 
 9. [ ] Click **Build business case**
 
-Building the business case takes several minutes. While we wait, let's examine a pre-built business case.
+This takes several minutes to calculate. Let's examine a completed example while we wait.
 
 ===
-
 # Analyze an Existing Business Case
 
-You can create several business cases for different scenarios, like rehosting vs refactoring, or considering different applications.
+Let's examine a completed business case that covers the entire datacenter with a modernization focus.
 
-Building the business case takes several minutes. While we wait, let's examine a pre-built business case focused on modernization for the entire datacenter to understand how to interpret business case results and identify savings opportunities
+1. [ ] Expand **Decide and Plan** and open **Business cases**
+2. [ ] Open **businesscase-for-paas**
 
-1. [ ] Expand **Decide and Plan** and open **Business cases** in the left panel
-2. [ ] Open the **businesscase-for-paas** business case
+## Key Metrics
+Notice the overview metrics:
+- **Cost comparison:** On-premises vs Azure costs
+- **Infrastructure scope:** 40 VMs (13 Linux, 27 Windows), 22 web apps, 6 databases  
+- **Annual savings:** $212.3K potential savings
 
-===
+Hover over the info icons to learn how costs are calculated.
 
-## Key Metrics Analysis
-
-The overview shows several important metrics:
-
-**Cost Comparison:**
-- The first tile displays estimated on-premises vs Azure costs and potential savings
-- Hover over the information icon to learn how on-premises costs are calculated
-
-**Infrastructure Summary:**
-- This business case analyzes 40 VMs (13 Linux, 27 Windows)
-- Identifies 22 unique web applications and 6 databases
-- Shows potential savings of $212.3K USD annually
-
-**Understanding the Savings:**
-Let's explore where these savings come from:
-
-1. [ ] Expand **Business Case Reports** and open **Current on-premises vs future**
-2. [ ] Scroll to the table below and review the different lines, like **Compute and licensing** cost savings
-3. [ ] Continue scrolling to see the estimated Carbon Dioxide emissions reduction
+1. [ ] Open **Business Case Reports** -> **Current on-premises vs future**
+2. [ ] Review the cost breakdown table
+3. [ ] Scroll down to see CO₂ emissions reduction estimates
 
 ===
+# Migration Strategies
 
-## Migration Strategies
+1. [ ] Navigate to **Migration Strategies**
 
-1. [ ] Navigate to the **Migration Strategies** page
+This shows Gartner's 6R migration approaches:
+- **Rehost:** Lift-and-shift to Azure VMs
+- **Replatform:** Move to managed services (Azure SQL MI)
+- **Refactor:** Modernize to PaaS (App Service)
 
-This report maps your workloads to Gartner's 6R migration strategies:
-- **Rehost:** Lift and shift to Azure VMs
-- **Replatform:** Move to managed services (e.g., Azure SQL Managed Instance)
-- **Refactor:** Modernize to PaaS services (e.g., Azure App Service)
+The report recommends a mix of rehosting and replatforming for your workloads.
 
-In this case, the report propose to us that after the migration some workloads will be rehosted and some will be replatformed.
-
-Can you find
-1. [ ] total cost of running all applications on Azure?
-2. [ ] Total cost of applications that will be hosted on VMs?
-3. [ ] Total cost of SQL databases running on VMs?
+Can you spot:
+1. [ ] Total cost for all Azure applications?
+2. [ ] Cost for applications hosted on VMs?
+3. [ ] Cost for SQL databases on VMs?
 
 ===
+# Azure Cost Assumptions
 
-## Azure Cost Assumptions
+1. [ ] Expand **Settings** -> **Azure cost**
 
-1. [ ] Expand **Settings** and navigate to the **Azure cost** page
-
-Here you can adjust parameters to get more accurate estimates:
+Here you can fine-tune estimates by adjusting:
 - Target regions
-- Discount percentages  
-- Migration timeline
-- Performance comfort factors
+- Discount percentages
+- Migration timeline  
+- Performance buffers
 
-Feel free to explore the business case further.
+> [!Alert] Changing these settings now will trigger a full recalculation, which takes too long for this exercise.
+> For the moment, leave the default values as they are. Once you finish the exercise, you are welcome to come back, adjust the settings, and examine how the results change.
+>
 
-You can find more information [in the official documentation](https://learn.microsoft.com/en-us/azure/migrate/concepts-business-case-calculation?view=migrate)
+> Learn more in the [official documentation](https://learn.microsoft.com/en-us/azure/migrate/concepts-business-case-calculation?view=migrate)
 
 ===
 # Technical Assessment
-**Goals:** Evaluate technical readiness and migration complexity for your workloads
 
-While business cases focus on financial aspects, **Assessments** help you choose the right migration approach and Azure services. <br>
-They evaluate technical readiness for migration. <br>
-Assessment focus on analyze workloads for migration strategy, Azure readiness and right-sized targets.
+While business cases show financial impact, **Assessments** evaluate technical readiness. They help choose the right migration approach and Azure services for each workload.
 
-When you create a business plan, an Assessment is created automatically for you.
+When you create a business case, an assessment is automatically created.
 
-1. [ ] Expand **Decide and plan** and Open **Assessments** page
+1. [ ] Expand **Decide and plan** -> **Assessments**
 
 
 > [+Hint] Screenshot
@@ -465,114 +446,88 @@ When you create a business plan, an Assessment is created automatically for you.
 > ![Screenshot](https://raw.githubusercontent.com/crgarcia12/migrate-modernize-lab/refs/heads/main/lab-material/media/01007.png)
 
 ===
+# Review Assessment Details
 
-## Assessment Components
+1. [ ] Open **businesscase-businesscase-for-paas** assessment  
+2. [ ] Notice the **Recommended path**: "PaaS preferred"
 
-Azure Migrate assessments evaluate your workloads for:
+Can you spot:
+3. [ ] Monthly costs for this approach?
+4. [ ] What percentage of VMs will be **Replatformed** vs **Rehosted**?
+5. [ ] Cost breakdown: Storage, Security, and Compute?
 
-- **Migration strategy:** The best approach to migrate application components (rehost, replatform, refactor)
-- **Readiness:** Suitability of source workloads for specific Azure services
-- **Right-sized targets:** Optimal Azure services based on performance requirements and cost
-- **Azure resource cost:** Total cost for hosting workloads on Azure
-- **Migration tools:** Recommended tools for each migration type
+6. [ ] Click **View Details** or select the **PaaS preferred** tab
 
-===
 
-## Review an Existing Assessment
+> [+Hint] Screenshot
+>
+> ![Screenshot](https://raw.githubusercontent.com/crgarcia12/migrate-modernize-lab/refs/heads/main/lab-material/media/01008.png)
 
-1. [ ] Expand **Decide and plan** and open the **Assessments** page
-2. [ ] Open the assessment called **businesscase-businesscase-for-paas**
-   (This assessment is automatically created when you build a business case)
-3. [ ] Review the **Recommended path**: Notice it shows "PaaS preferred"
-4. [ ] Explore the different tabs to see:
-5. [ ] Check the monthly cost for this path
-6. [ ] Check how many workloads (VMs) are going to be Replatformed and how many Rehosted
-7. [ ] Chek the split cost on Storage, Security and Copute
+You will see three migration targets:
+- Web apps -> App Service
+- SQL Instances -> Azure VMs  
+- Servers -> Azure VMs
 
-===
-
-## Review an Existing Assessment
-
-Now we understand what we should do. Let's dig into individual applications to understand what is the reommended actions
-
-1. [] Click in **View Details** or select the **PaaS preferred** tab
-	
-    > [+Hint] Screenshot
-	>
-	> ![Screenshot](https://raw.githubusercontent.com/crgarcia12/migrate-modernize-lab/refs/heads/main/lab-material/media/01008.png)
-
-There are three targets. 
-1. Web apps to App Service
-1. SQL Instances to Azure VMs
-1. Serviers to azure VM
-
-Open the first one, **Web apps to App service code**
+7. [ ] Open **Web apps to App Service**
 
 ===
+# Web Apps Analysis
 
-## WebApps to App Service
-
-There are 22 applications, of which 12 are ready to be migrated. Ten Appliations require some work.
-Let's dig into these tasks
-
-Can you spot
-1. [] Total Number of applications?
-2. [ ] Applications that are Ready with conditions?
+Can you spot:
+1. [ ] Total number of applications?
+2. [ ] Applications "Ready with conditions"?
 3. [ ] Recommended App Service Plan?
-4. [ ] Top migration issues we will face?
+4. [ ] Top migration issues to address?
 
-> **Note:** You can create specific assessments for individual applications or server groups to get focus detailed technical recommendations. 
+From the application list, select **ContosoUniversity** to see detailed analysis.
+
+Can you spot:
+5. [ ] Application URL?
+6. [ ] Migration warnings (check Readiness tab)?
+
+This application needs some work but is a good migration candidate.
+
+===
+# Application Deep Dive
+
+1. [ ] Go back to the main page
+2. [ ] Expand **Explore applications** -> **Applications**
+3. [ ] Select **ContosoUniversity**
+
+Can you spot:
+4. [ ] How many servers and databases make up the application?
+5. [ ] What is the Operating system support status?
+6. [ ] Click **Workloads** to see details on the servers that compose this application
+
+===
+# Application Deep Dive
+In the Workloads page, can you spot:
+5. [ ] Which servers are out of support?
+6. [ ] Which are in extended support?
+
+7. [ ] Open the out-of-support database by clicking in the name **ContosoUniversity-pgsql-db**
+
+Can you spot:
+8. [ ] What version of PostgreSQL is currently running?
 
 ===
 
-## Contoso University
+### Software Inventory
+Finally, let's check what other software is running on the servers, to make sure we are not forgetting any important component
 
-From the list of applications, select now ContosoUniversity
+9. [ ] Go back to the Worloads, and open **win-ContosoUniversity-backend**
 
-If the appliance run long enough. You will find in here information regarding the application
 
-Can you spot
-1. [] Appliation URL
-1. [] Migration warnings (Readiness tab)
+> [+Hint] Screenshot
+>
+> ![Screenshot](https://raw.githubusercontent.com/crgarcia12/migrate-modernize-lab/refs/heads/main/lab-material/media/01010.png)
 
-This application, even when it seems that it require some work. Its a nice candidate to start our migration
-Let's look for some more details before we start the migration
-
-===
-
-## Contoso University
-
-1. [ ] Expand the **Explore applications** tab
-2. [ ] Open Contoso University application we created some minutes ago
 
 Can you spot:
-1. [ ] How many servers and databases copose the application?
-2. [ ] The operative systems state?
+10. [ ] Total software count on the VM?
+11. [ ] Number of web hosting software packages?
 
-Click in the Workloads to take a look at the involved servers
-
-Can you spot:
-1. [ ] What servers are out of support?
-2. [ ] What are in extended support?
-
-Open the database that is out of support
-
-Can you spot:
-1. [] What is the current running version?
-
-===
-
-## Contoso University
-
-The last thing we should do before migrating, is verify what other sofware is running on the VM
-
-Go back to the application, and open the win-ContosoUniversity-backedn
-
-![Screenshot](https://raw.githubusercontent.com/crgarcia12/migrate-modernize-lab/refs/heads/main/lab-material/media/01010.png)
-
-Can you spot:
-1. [] Sofware count on the VM?
-1. [] Number of Web Hosting software
+This analysis helps you understand migration complexity and dependencies.
 
 ===
 
