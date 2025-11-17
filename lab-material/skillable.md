@@ -8,8 +8,8 @@ At the top you will have two tabs: **Instructions** and **Resources**
 In Resources you will find useful information like credentials and links. You can switch between them at any time.
 
 
-Now, let's begin. Log into the virtual machine using the following credentials: 
-Username: +++@lab.VirtualMachine(Win11-Pro-Base).Username+++
+Now, let's begin. Log into the virtual machine using the following credentials: <br>
+Username: +++@lab.VirtualMachine(Win11-Pro-Base).Username+++ <br>
 Password: +++@lab.VirtualMachine(Win11-Pro-Base).Password+++
 
 ===
@@ -18,14 +18,22 @@ Password: +++@lab.VirtualMachine(Win11-Pro-Base).Password+++
 
 The objective of this lab is to explore the different steps involved in a real-life migration
 
+---
+
 #### Exercise 1: Prepare a migration:
 * Learn how to install an appliance that collects data from an on-premises datacenter using Azure Migrate
+
+---
 
 #### Exercise 2: Analyze migration data and build a business case:
 * Learn how to build a Business Case and decide on the next step when planning a migration
 
+---
+
 #### Exercise 3: Migrate a .NET application:
 * Modernize a .NET application using GitHub Copilot and deploy it to Azure.
+
+---
 
 #### Exercise 4: Migrate a Java application:
 * Modernize a Java application using GitHub Copilot.
@@ -87,7 +95,21 @@ In the Windows menu, open the `Hyper-V Manager` to discover the inner VMs.
 >
 > ![Screenshot](https://raw.githubusercontent.com/crgarcia12/migrate-modernize-lab/refs/heads/main/lab-material/media/00915.png)
 
-TODO: Open one of the VMs and see the application running
+1. [ ] In **Hyper-V Manager**, select the inner VM **WEB-2025-100**. Right click ->  **Connect**
+
+> [+Hint] Connecting to a Hyper-V VM from Hyper-V host
+>
+> ![Screenshot](https://raw.githubusercontent.com/crgarcia12/migrate-modernize-lab/refs/heads/main/lab-material/media/0012.png)
+
+3. [ ] If you are required to sign in, use the following credentials<br>
+	username: +++adminuser+++<br>
+    password: +++demo!pass123+++
+4. [ ] Open Edge inside the Hyper-V VMand verify that an application is running by opening +++http://172.100.2.110+++<br>
+	Notice that the first time you run it. It will take some time to load
+
+> [+Hint] Open an application in Hyper-V Guest VM
+>
+> ![Screenshot](https://raw.githubusercontent.com/crgarcia12/migrate-modernize-lab/refs/heads/main/lab-material/media/0013.png)
 
 We will now create another VM and install the Azure Migrate Appliance
 
