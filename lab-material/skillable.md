@@ -1180,7 +1180,7 @@ The migration process updated the following configuration files:
 - Test configurations - Updated to work with the new authentication method
 
 > [!hint] Througout this lab, the GitHub Copilot App Modernization extension will create, edit and change various files. The Agent will give you an option to _Keep_ or _Undo_ these changes which will be saved into a new Branch, preserving your original files in case you need to rollback any changes.
-!IMAGE[keep-or-undo.png](instructions310381/keep-or-undo.png)
+!IMAGE[8fp2nrzs.jpg](instructions310257/8fp2nrzs.jpg)
 
 ===
 
@@ -1188,7 +1188,7 @@ The migration process updated the following configuration files:
 
 After implementing the migration changes, the App Modernization tool automatically validates the results through a comprehensive testing process to ensure the migration changes are secure, functional, and consistent.
 
-!IMAGE[module2-step16-cve-validation-iteration-loop.png](instructions310381/module2-step16-cve-validation-iteration-loop.png)
+!IMAGE[y18ydpod.jpg](instructions310257/y18ydpod.jpg)
 
 **Validation Stages:**
 
@@ -1201,7 +1201,7 @@ After implementing the migration changes, the App Modernization tool automatical
 
 > [!note] During these stages, you might be prompted to allow the **GitHub Copilot app modernization** extension to access GitHub. Allow it and select your user account when asked.
 >
->!IMAGE[allow-ghcp-cve.png](instructions310381/allow-ghcp-cve.png)
+>!IMAGE[vflz96jl.jpg](instructions310257/vflz96jl.jpg)
 
 **Automated Error Detection and Resolution:**
 
@@ -1239,6 +1239,8 @@ After you have completed the modernization task, run the application to ensure t
 ### Other Tasks ###
 
 Continue modernization your app by selecting another task and completing the modernization steps.
+
+!IMAGE[tresdc8l.jpg](instructions310257/tresdc8l.jpg)
 
 === 
 
