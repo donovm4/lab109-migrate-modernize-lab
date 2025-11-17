@@ -1098,6 +1098,8 @@ Based on the assessment findings, GitHub Copilot app modernization provides two 
 
 For this workshop, we'll focus on one modernization area that demonstrates how to externalize dependencies in the workload to Azure PaaS before deploying to app service. We'll migrate from AWS S3 buckets to Azure Blob Storage.
 
+===
+
 ### Select AWS S3 Task
 
 Begin the modernization by selecting the desired migration task. For our java application, we will migrate to Azure Blob Storage.  You can expand the migration task to see detail about what will happen during the task and an explanation of why it's important to our modernization.
@@ -1117,6 +1119,8 @@ The App Modernization tool has analyzed your java application and generated a co
 !IMAGE[wpoydt5u.jpg](instructions310257/wpoydt5u.jpg)
 
 To Begin Migration type **"Continue"** in the GitHub Agent Chat to start the code refactoring.
+
+===
 
 ### Review Migration Process and Progress Tracking
 
@@ -1178,6 +1182,7 @@ The migration process updated the following configuration files:
 > [!hint] Througout this lab, the GitHub Copilot App Modernization extension will create, edit and change various files. The Agent will give you an option to _Keep_ or _Undo_ these changes which will be saved into a new Branch, preserving your original files in case you need to rollback any changes.
 !IMAGE[keep-or-undo.png](instructions310381/keep-or-undo.png)
 
+===
 
 ### Validation and Fix Iteration Loop
 
@@ -1213,6 +1218,10 @@ The tool includes intelligent error detection capabilities that automatically id
 >
 >This systematic approach ensures your java application is successfully modernized for Azure Blob Storage while maintaining full functionality.
 > [!hint] 
+
+===
+
+## Run the App ##
 
 After you have completed the modernization task, run the application to ensure the task was successful:
 
