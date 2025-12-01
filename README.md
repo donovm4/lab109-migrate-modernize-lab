@@ -591,6 +591,8 @@ Thank you for investing the time and see you next time!
 
 ## Contributors
 
+Aydin Kajdic
+- Aydin Kajdic [GitHub](https://github.com/ ajdinkajdic) | [LinkedIn](https://www.linkedin.com/in/aydin-kajdic/)
 * Carlos Garcia - [GitHub](https://github.com/crgarcia12) | [LinkedIn](https://www.linkedin.com/in/crlos-garcia/)
 * Julia Kordick - [GitHub](https://github.com/jkordick) | [LinkedIn](https://www.linkedin.com/in/julia-kordick/)
 * Mitul Shah - [GitHub](https://github.com/mitulashah) | [LinkedIn](https://www.linkedin.com/in/mitulashah/
