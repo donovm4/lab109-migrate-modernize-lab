@@ -5,7 +5,7 @@
 ######################################################
 
 $SkillableEnvironment = $false
-$EnvironmentName = "migrate" # Set your environment name here for non-Skillable environments
+$EnvironmentName = "mig$(Get-Date -Format 'yyMMddHHmmss')" # Set your environment name here for non-Skillable environments
 $ScriptVersion = "16.0.0"
 
 ######################################################
