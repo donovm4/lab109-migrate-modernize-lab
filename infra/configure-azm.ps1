@@ -166,14 +166,26 @@ function New-AzureEnvironment {
     
     try {
         Write-LogToBlob "Environment location: $Location"
-        
-        $templateFile = '.\templates\lab197959-template-v6.json'
 
-        if(Test-Path $templateFile) {
+        $templateFile = 'lab197959-template-v6.json'
+
+        if(Test-Path ".\templates\$templateFile") {
+            $templateFile = ".\templates\$templateFile"
             Write-LogToBlob "Local ARM template found: $templateFile"
         } else {
-            Write-LogToBlob "ARM template not found. Using remote template." "WARN"
-            $templateFile = "https://raw.githubusercontent.com/crgarcia12/main/templates/lab197959-template-v6.json"
+            Write-LogToBlob "ARM template not found locally. Downloading remote template..." "WARN"
+            $remoteTemplateUrl = "https://raw.githubusercontent.com/crgarcia12/migrate-modernize-lab/main/infra/templates/$templateFile"
+            $downloadedTemplateFile = Join-Path (Get-Location) $templateFile
+            
+            try {
+                Invoke-WebRequest -Uri $remoteTemplateUrl -OutFile $downloadedTemplateFile
+                Write-LogToBlob "Template downloaded successfully to: $downloadedTemplateFile"
+                $templateFile = $downloadedTemplateFile
+            }
+            catch {
+                Write-LogToBlob "Failed to download remote template: $($_.Exception.Message)" "ERROR"
+                throw
+            }
         }
 
         Write-LogToBlob "Creating resource group: $ResourceGroupName"
