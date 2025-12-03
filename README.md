@@ -305,62 +305,61 @@ Modernize the Contoso University .NET Framework application to .NET 9 and deploy
 ### Actions
 
 **Setup and Preparation:**
-1. Ensure you're logged into GitHub at https://github.com/enterprises/skillable-events
-2. Navigate to `https://github.com/crgarcia12/migrate-modernize-lab` and click the "Fork" button in the top-right corner
+1. Navigate to `https://github.com/crgarcia12/migrate-modernize-lab` and click the "Fork" button in the top-right corner
 
 ![Fork the repository](https://raw.githubusercontent.com/crgarcia12/migrate-modernize-lab/refs/heads/main/lab-material/media/fork-button.png)
 
-3. Select your account as the owner and click "Create fork"
+2. Select your account as the owner and click "Create fork"
 
 ![Create fork dialog](https://raw.githubusercontent.com/crgarcia12/migrate-modernize-lab/refs/heads/main/lab-material/media/create-fork.png)
 
-4. Once the fork is created, click the "Code" button and copy your forked repository URL
+3. Once the fork is created, click the "Code" button and copy your forked repository URL
 
 ![Copy clone URL](https://raw.githubusercontent.com/crgarcia12/migrate-modernize-lab/refs/heads/main/lab-material/media/clone-url.png)
 
-5. Open Visual Studio 2022
-6. Select "Clone a repository" and paste your forked repository URL
-7. Navigate to Solution Explorer and locate the ContosoUniversity project
-8. Rebuild the project to verify it compiles successfully
+4. Open Visual Studio 2022
+5. Select "Clone a repository" and paste your forked repository URL
+6. Navigate to Solution Explorer and locate the ContosoUniversity project
+7. Rebuild the project to verify it compiles successfully
 
 ![Application running in IIS Express](https://raw.githubusercontent.com/crgarcia12/migrate-modernize-lab/refs/heads/main/lab-material/media/0030.png)
 
 **Assess and Upgrade to .NET 9:**
 
-7. Right-click the ContosoUniversity project and select "Modernize"
+8. Right-click the ContosoUniversity project and select "Modernize"
 
 ![Right-click Modernize menu](https://raw.githubusercontent.com/crgarcia12/migrate-modernize-lab/refs/heads/main/lab-material/media/0040.png)
 
-8. Sign in to GitHub Copilot if prompted
-9. Select Claude Sonnet 4.5 as the model
-10. Click "Upgrade to a newer .NET version"
-11. Allow GitHub Copilot to analyze the codebase
-12. Review the upgrade plan when presented
-13. Allow operations when prompted during the upgrade process
-14. Wait for the upgrade to complete (marked by `dotnet-upgrade-report.md` appearing)
+9. Sign in to GitHub Copilot if prompted
+10. Select Claude Sonnet 4.5 as the model
+11. Click "Upgrade to a newer .NET version"
+12. Allow GitHub Copilot to analyze the codebase
+13. Review the upgrade plan when presented
+14. Allow operations when prompted during the upgrade process
+15. Wait for the upgrade to complete (marked by `dotnet-upgrade-report.md` appearing)
 
 **Migrate to Azure:**
 
-15. Right-click the project again and select "Modernize"
-16. Click "Migrate to Azure" in the GitHub Copilot Chat window
-17. Wait for GitHub Copilot to assess cloud readiness
+16. Right-click the project again and select "Modernize"
+17. Click "Migrate to Azure" in the GitHub Copilot Chat window
+18. Wait for GitHub Copilot to assess cloud readiness
 
 **Resolve Cloud Readiness Issues:**
-18. Open the `dotnet-upgrade-report.md` file
+19. Open the `dotnet-upgrade-report.md` file
 
 ![Upgrade report with cloud readiness issues](https://raw.githubusercontent.com/crgarcia12/migrate-modernize-lab/refs/heads/main/lab-material/media/0080.png)
 
-19. Review the Cloud Readiness Issues section
-20. Click "Migrate from Windows AD to Microsoft Entra ID"
-21. Allow GitHub Copilot to implement the authentication changes
-22. Ensure all mandatory tasks are resolved
-23. Review the changes made to authentication configuration
+20. Review the Cloud Readiness Issues section
+21. Click "Migrate from Windows AD to Microsoft Entra ID"
+22. Allow GitHub Copilot to implement the authentication changes
+23. Ensure all mandatory tasks are resolved
+24. Review the changes made to authentication configuration
 
 **Deploy to Azure:**
 
-24. Allow GitHub Copilot to complete the Azure App Service deployment
-25. Verify the deployment succeeds
-26. Test the deployed application in Azure
+25. Allow GitHub Copilot to complete the Azure App Service deployment
+26. Verify the deployment succeeds
+27. Test the deployed application in Azure
 
 ### Success Criteria
 
@@ -391,9 +390,8 @@ Modernize the Asset Manager Java Spring Boot application for Azure deployment, m
 ### Actions
 
 **Environment Setup:**
-1. Navigate to https://github.com/enterprises/skillable-events and authenticate
-2. Open Docker Desktop and ensure it's running
-3. Open Terminal and run the setup commands:
+1. Open Docker Desktop and ensure it's running
+2 Open Terminal and run the setup commands:
    ```bash
    mkdir C:\gitrepos\lab
    cd C:\gitrepos\lab
@@ -401,79 +399,79 @@ Modernize the Asset Manager Java Spring Boot application for Azure deployment, m
    cd .\migrate-modernize-lab\src\AssetManager\
    code .
    ```
-4. Login to GitHub Enterprise from VS Code
-5. Install GitHub Copilot App Modernization extension if not present
+3. Login to GitHub from VS Code
+4. Install GitHub Copilot App Modernization extension if not present
 
 **Validate Application Locally:**
 
-6. Open Terminal in VS Code (View → Terminal)
-7. Run `scripts\startapp.cmd`
-8. Wait for Docker containers (RabbitMQ, Postgres) to start
-9. Allow network permissions when prompted
-10. Verify application is accessible at http://localhost:8080
-11. Stop the application by closing console windows
+5. Open Terminal in VS Code (View → Terminal)
+6. Run `scripts\startapp.cmd`
+7. Wait for Docker containers (RabbitMQ, Postgres) to start
+8. Allow network permissions when prompted
+9. Verify application is accessible at http://localhost:8080
+10. Stop the application by closing console windows
 
 **Perform AppCAT Assessment:**
 
-12. Open GitHub Copilot App Modernization extension in the Activity bar
-13. Ensure Claude Sonnet 4.5 is selected as the model
-14. Click "Migrate to Azure" to begin assessment
-15. Wait for AppCAT CLI installation to complete
-16. Review assessment progress in the VS Code terminal
-17. Wait for assessment results (9 cloud readiness issues, 4 Java upgrade opportunities)
+11. Open GitHub Copilot App Modernization extension in the Activity bar
+12. Ensure Claude Sonnet 4.5 is selected as the model
+13. Click "Migrate to Azure" to begin assessment
+14. Wait for AppCAT CLI installation to complete
+15. Review assessment progress in the VS Code terminal
+16. Wait for assessment results (9 cloud readiness issues, 4 Java upgrade opportunities)
 
 **Analyze Assessment Results:**
 
-18. Review the assessment summary in GitHub Copilot chat
-19. Examine issue prioritization:
+17. Review the assessment summary in GitHub Copilot chat
+18. Examine issue prioritization:
     - Mandatory (Purple) - Critical blocking issues
     - Potential (Blue) - Performance optimizations
     - Optional (Gray) - Future improvements
-20. Click on individual issues to see detailed recommendations
-21. Focus on the AWS S3 to Azure Blob Storage migration finding
+19. Click on individual issues to see detailed recommendations
+20. Focus on the AWS S3 to Azure Blob Storage migration finding
 
 **Execute Guided Migration:**
 
-22. Expand the "Migrate from AWS S3 to Azure Blob Storage" task
-23. Read the explanation of why this migration is important
-24. Click the "Run Task" button to start the migration
-25. Review the generated migration plan in the chat window and `plan.md` file
-26. Type "Continue" in the chat to begin code refactoring
+21. Expand the "Migrate from AWS S3 to Azure Blob Storage" task
+22. Read the explanation of why this migration is important
+23. Click the "Run Task" button to start the migration
+24. Review the generated migration plan in the chat window and `plan.md` file
+25. Type "Continue" in the chat to begin code refactoring
 
 **Monitor Migration Progress:**
 
-27. Watch the GitHub Copilot chat for real-time status updates
-28. Check the `progress.md` file for detailed change logs
-29. Review file modifications as they occur:
+26. Watch the GitHub Copilot chat for real-time status updates
+27. Check the `progress.md` file for detailed change logs
+28. Review file modifications as they occur:
     - `pom.xml` and `build.gradle` updates for Azure SDK dependencies
     - `application.properties` configuration changes
     - Spring Cloud Azure version properties
-30. Allow any prompted operations during the migration
+29. Allow any prompted operations during the migration
 
 **Validate Migration:**
 
-31. Wait for automated validation to complete:
+30. Wait for automated validation to complete:
     - CVE scanning for security vulnerabilities
     - Build validation
     - Consistency checks
     - Test execution
-32. Review validation results in the chat window
-33. Allow automated fixes if validation issues are detected
-34. Confirm all validation stages pass successfully
+31. Review validation results in the chat window
+32. Allow automated fixes if validation issues are detected
+33. Confirm all validation stages pass successfully
 
 **Test Modernized Application:**
 
-35. Open Terminal in VS Code
-36. Run `scripts\startapp.cmd` again
-37. Verify the application starts with Azure Blob Storage integration
-38. Test application functionality at http://localhost:8080
-39. Confirm no errors related to storage operations
+34. Open Terminal in VS Code
+35. Run `scripts\startapp.cmd` again
+36. Verify the application starts with Azure Blob Storage integration
+37. Test application functionality at http://localhost:8080
+38. Confirm no errors related to storage operations
 
 **Optional: Continue Modernization:**
 
-40. Review other migration tasks in the assessment report
-41. Execute additional migrations as time permits
-42. Track progress through the `plan.md` and `progress.md` files
+39. Review other migration tasks in the assessment report
+40. Execute additional migrations as time permits
+41. Track progress through the `plan.md` and `progress.md` files
 
 ### Success Criteria
 
