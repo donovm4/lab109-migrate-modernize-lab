@@ -5,9 +5,9 @@
 ######################################################
 
 $SkillableEnvironment = $false
-$EnvironmentName = "mig$(Get-Date -Format 'yyMMddHHmmss')" # Set your environment name here for non-Skillable environments
+$EnvironmentName = "AzMigrate" # Set your environment name here for non-Skillable environments
 $ScriptVersion = "16.0.0"
-$EnvironmentName = "" # Globally unique! Set your environment name here
+# $EnvironmentName = "" # Globally unique! Set your environment name here
 
 if($EnvironmentName -eq "" ) {
     $EnvironmentName = "lab" + (Get-Date -Format "yyMMddHHmmss")
@@ -131,7 +131,7 @@ function Get-AzureRegion {
         [bool]$IsSkillableEnvironment
     )
     
-    $defaultLocation = "swedencentral"
+    $defaultLocation = "canadacentral" # updated
     Write-LogToBlob "Determining location for operations"
     
     # If Skillable environment, try to get location from MigrateProject
@@ -173,14 +173,14 @@ function New-AzureEnvironment {
     try {
         Write-LogToBlob "Environment location: $Location"
         
-        $templateFileName = "lab197959-template-v6.json"
+        $templateFileName = "lab109-template-v1.json"
         $templateFilePath = ".\templates\$templateFileName"
 
         if (Test-Path $templateFilePath) {
             Write-LogToBlob "Local ARM template found: $templateFilePath"
         } else {
             Write-LogToBlob "Local ARM template not found. Downloading from GitHub..." "WARN"
-            $remoteTemplateUrl = "https://raw.githubusercontent.com/crgarcia12/migrate-modernize-lab/refs/heads/main/lab-creation/templates/$templateFileName"
+            $remoteTemplateUrl = "https://raw.githubusercontent.com/donovm4/migrate-modernize-lab/refs/heads/main/lab-creation/templates/$templateFileName"
             $templateFilePath = Join-Path $env:TEMP $templateFileName
             
             Write-LogToBlob "Downloading template from: $remoteTemplateUrl"
