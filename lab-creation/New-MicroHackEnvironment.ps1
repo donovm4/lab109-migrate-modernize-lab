@@ -502,7 +502,7 @@ function Get-DiscoveryArtifacts {
     Write-LogToBlob "Downloading discovery artifacts"
     
     try {
-        $remoteZipFilePath = "https://github.com/crgarcia12/migrate-modernize-lab/raw/refs/heads/main/lab-creation/Azure-Migrate-Discovery.zip"
+        $remoteZipFilePath = "https://github.com/crgarcia12/migrate-modernize-lab/raw/refs/heads/main/lab-creation/CollectorV2.zip"
         $localZipFilePath = Join-Path (Get-Location) "importArtifacts.zip"
         
         Write-LogToBlob "Downloading artifacts from: $remoteZipFilePath"
