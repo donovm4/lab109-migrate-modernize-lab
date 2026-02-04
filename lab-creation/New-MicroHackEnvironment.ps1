@@ -180,7 +180,7 @@ function New-AzureEnvironment {
             Write-LogToBlob "Local ARM template found: $templateFilePath"
         } else {
             Write-LogToBlob "Local ARM template not found. Downloading from GitHub..." "WARN"
-            $remoteTemplateUrl = "https://raw.githubusercontent.com/donovm4/migrate-modernize-lab/refs/heads/main/lab-creation/templates/$templateFileName"
+            $remoteTemplateUrl = "https://raw.githubusercontent.com/donovm4/lab109-migrate-modernize-lab/refs/heads/main/lab-creation/templates/$templateFileName"
             $templateFilePath = Join-Path $env:TEMP $templateFileName
             
             Write-LogToBlob "Downloading template from: $remoteTemplateUrl"
@@ -502,7 +502,7 @@ function Get-DiscoveryArtifacts {
     Write-LogToBlob "Downloading discovery artifacts"
     
     try {
-        $remoteZipFilePath = "https://github.com/crgarcia12/migrate-modernize-lab/raw/refs/heads/main/lab-creation/CollectorV2.zip"
+        $remoteZipFilePath = "https://github.com/donovm4/lab109-migrate-modernize-lab/raw/refs/heads/main/lab-creation/CollectorV2.zip"
         $localZipFilePath = Join-Path (Get-Location) "importArtifacts.zip"
         
         Write-LogToBlob "Downloading artifacts from: $remoteZipFilePath"
@@ -1377,21 +1377,21 @@ function Invoke-AzureMigrateConfiguration {
         $webAppSiteDetails = Get-WebAppSiteDetails -SubscriptionId $subscriptionId -ResourceGroupName $resourceGroupName -MasterSiteName $masterSiteName -WebAppSiteName $webAppSiteName
         $sqlSiteDetails = Get-SqlSiteDetails -SubscriptionId $subscriptionId -ResourceGroupName $resourceGroupName -MasterSiteName $masterSiteName -SqlSiteName $sqlSiteName
         
-        # Step 7: Configure VMware Collector
-        $agentId = Get-VMwareCollectorAgentId -SubscriptionId $subscriptionId -ResourceGroupName $resourceGroupName -VMwareSiteName $vmwareSiteName
-        Invoke-VMwareCollectorSync -AgentId $agentId -SubscriptionId $subscriptionId -ResourceGroupName $resourceGroupName -AssessmentProjectName $assessmentProjectName -EnvironmentName $environmentName -VMwareSiteName $vmwareSiteName
+        # # Step 7: Configure VMware Collector
+        # $agentId = Get-VMwareCollectorAgentId -SubscriptionId $subscriptionId -ResourceGroupName $resourceGroupName -VMwareSiteName $vmwareSiteName
+        # Invoke-VMwareCollectorSync -AgentId $agentId -SubscriptionId $subscriptionId -ResourceGroupName $resourceGroupName -AssessmentProjectName $assessmentProjectName -EnvironmentName $environmentName -VMwareSiteName $vmwareSiteName
         
         # Step 8: Create WebApp and SQL Collectors (if available)
         $webAppCollectorCreated = New-WebAppCollector -SubscriptionId $subscriptionId -ResourceGroupName $resourceGroupName -AssessmentProjectName $assessmentProjectName -EnvironmentName $environmentName -WebAppSiteId $webAppSiteDetails.SiteId -WebAppAgentId $webAppSiteDetails.AgentId
         $sqlCollectorCreated = New-SqlCollector -SubscriptionId $subscriptionId -ResourceGroupName $resourceGroupName -AssessmentProjectName $assessmentProjectName -EnvironmentName $environmentName -SqlSiteId $sqlSiteDetails.SiteId -SqlAgentId $sqlSiteDetails.AgentId
         
-        # Step 9: Create assessments
-        $vmAssessmentId = New-VMAssessment -SubscriptionId $subscriptionId -ResourceGroupName $resourceGroupName -AssessmentProjectName $assessmentProjectName -Location $location -VMwareSiteName $vmwareSiteName
-        $sqlAssessmentId = New-SqlAssessment -SubscriptionId $subscriptionId -ResourceGroupName $resourceGroupName -AssessmentProjectName $assessmentProjectName -Location $location -VMwareSiteName $vmwareSiteName -MasterSiteName $masterSiteName -WebAppSiteName $webAppSiteName -SqlSiteName $sqlSiteName
+        # # Step 9: Create assessments
+        # $vmAssessmentId = New-VMAssessment -SubscriptionId $subscriptionId -ResourceGroupName $resourceGroupName -AssessmentProjectName $assessmentProjectName -Location $location -VMwareSiteName $vmwareSiteName
+        # $sqlAssessmentId = New-SqlAssessment -SubscriptionId $subscriptionId -ResourceGroupName $resourceGroupName -AssessmentProjectName $assessmentProjectName -Location $location -VMwareSiteName $vmwareSiteName -MasterSiteName $masterSiteName -WebAppSiteName $webAppSiteName -SqlSiteName $sqlSiteName
         
-        # Step 10: Create business cases
-        $paasBusinessCaseName = New-BusinessCaseOptimizeForPaas -SubscriptionId $subscriptionId -ResourceGroupName $resourceGroupName -AssessmentProjectName $assessmentProjectName -Location $location -VMwareSiteName $vmwareSiteName -MasterSiteName $masterSiteName -WebAppSiteName $webAppSiteName -SqlSiteName $sqlSiteName
-        $iaasBusinessCaseName = New-BusinessCaseIaasOnly -SubscriptionId $subscriptionId -ResourceGroupName $resourceGroupName -AssessmentProjectName $assessmentProjectName -Location $location -VMwareSiteName $vmwareSiteName -MasterSiteName $masterSiteName -WebAppSiteName $webAppSiteName -SqlSiteName $sqlSiteName
+        # # Step 10: Create business cases
+        # $paasBusinessCaseName = New-BusinessCaseOptimizeForPaas -SubscriptionId $subscriptionId -ResourceGroupName $resourceGroupName -AssessmentProjectName $assessmentProjectName -Location $location -VMwareSiteName $vmwareSiteName -MasterSiteName $masterSiteName -WebAppSiteName $webAppSiteName -SqlSiteName $sqlSiteName
+        # $iaasBusinessCaseName = New-BusinessCaseIaasOnly -SubscriptionId $subscriptionId -ResourceGroupName $resourceGroupName -AssessmentProjectName $assessmentProjectName -Location $location -VMwareSiteName $vmwareSiteName -MasterSiteName $masterSiteName -WebAppSiteName $webAppSiteName -SqlSiteName $sqlSiteName
         
         # Step 11: Create global assessment
         $heteroAssessmentName = New-GlobalAssessment -SubscriptionId $subscriptionId -ResourceGroupName $resourceGroupName -AssessmentProjectName $assessmentProjectName -Location $location -VmAssessmentId $vmAssessmentId -SqlAssessmentId $sqlAssessmentId
@@ -1403,8 +1403,8 @@ function Invoke-AzureMigrateConfiguration {
         Write-LogToBlob "- SQL Collector: $(if ($sqlCollectorCreated) { 'Created' } else { 'Skipped' })"
         Write-LogToBlob "- VM Assessment: ID: $vmAssessmentId"
         Write-LogToBlob "- SQL Assessment ID: $sqlAssessmentId"
-        Write-LogToBlob "- PaaS Business Case: $paasBusinessCaseName"
-        Write-LogToBlob "- IaaS Business Case: $iaasBusinessCaseName"
+        # Write-LogToBlob "- PaaS Business Case: $paasBusinessCaseName"
+        # Write-LogToBlob "- IaaS Business Case: $iaasBusinessCaseName"
         Write-LogToBlob "- Global Assessment: $heteroAssessmentName"
     }
     catch {
