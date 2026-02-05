@@ -3,7 +3,7 @@
 # Designed for non-interactive execution
 
 # Configuration
-$ScriptUrl = "https://github.com/crgarcia12/migrate-modernize-lab/raw/refs/heads/main/lab-creation/New-MicroHackEnvironment.ps1"
+$ScriptUrl = "https://github.com/donovm4/lab109-migrate-modernize-lab/raw/refs/heads/main/lab-creation/New-MicroHackEnvironment.ps1"
 $ScriptVersion = "9.0.0"
 
 # Environment configuration for this script
