@@ -5,9 +5,9 @@
 ######################################################
 
 $SkillableEnvironment = $false
-$EnvironmentName = "mig$(Get-Date -Format 'yyMMddHHmmss')" # Set your environment name here for non-Skillable environments
+# $EnvironmentName = "mig$(Get-Date -Format 'yyMMddHHmmss')" # Set your environment name here for non-Skillable environments
 $ScriptVersion = "16.0.0"
-$EnvironmentName = "" # Globally unique! Set your environment name here
+$EnvironmentName = "02052026" # Globally unique! Set your environment name here
 
 if($EnvironmentName -eq "" ) {
     $EnvironmentName = "lab" + (Get-Date -Format "yyMMddHHmmss")
@@ -188,8 +188,8 @@ function New-AzureEnvironment {
             Write-LogToBlob "Template downloaded to: $templateFilePath"
         }
 
-        Write-LogToBlob "Creating resource group: $ResourceGroupName"
-        New-AzResourceGroup -Name $ResourceGroupName -Location $Location -Force
+        # Write-LogToBlob "Creating resource group: $ResourceGroupName"
+        # New-AzResourceGroup -Name $ResourceGroupName -Location $Location -Force
         
         Write-LogToBlob "Deploying ARM template..."
         New-AzResourceGroupDeployment `
@@ -1327,12 +1327,12 @@ function Invoke-AzureMigrateConfiguration {
 
     # Define all resource names
     $subscriptionId = (Get-AzContext).Subscription.Id
-    $resourceGroupName = if ($SkillableEnvironment) { "on-prem" } else { "${EnvironmentName}-rg" }
-    $migrateProjectName = "${EnvironmentName}-azm"
+    $resourceGroupName = "AzMigrateRG"
+    $migrateProjectName = "Automated-Migration-Project-${EnvironmentName}"
     $assessmentProjectName = "${EnvironmentName}asmproject"
     $vmwareSiteName = "${EnvironmentName}vmwaresite"
     $webAppSiteName = "${EnvironmentName}webappsite"
-    $sqlSiteName = "${environmentName}sqlsites"
+    $sqlSiteName = "${EnvironmentName}sqlsites"
     $masterSiteName = "${EnvironmentName}mastersite"
     
     # Get the location for all operations
@@ -1358,9 +1358,9 @@ function Invoke-AzureMigrateConfiguration {
         Import-AzureModules
 
         # Step 2: Create Azure environment (skip if Skillable)
-        if (-not $SkillableEnvironment) {
+        # if (-not $SkillableEnvironment) {
             New-AzureEnvironment -EnvironmentName $environmentName -ResourceGroupName $resourceGroupName -Location $location
-        }
+        # }
         
         # Step 3: Wait for all Azure Migrate resources to be ready (created by Skillable ARM template)
         Wait-AzureMigrateResources -SubscriptionId $subscriptionId -ResourceGroupName $resourceGroupName -MigrateProjectName $migrateProjectName -AssessmentProjectName $assessmentProjectName -VMwareSiteName $vmwareSiteName -MasterSiteName $masterSiteName -WebAppSiteName $webAppSiteName -SqlSiteName $sqlSiteName
@@ -1401,8 +1401,8 @@ function Invoke-AzureMigrateConfiguration {
         # Write-LogToBlob "- VMware Collector: Synchronized"
         Write-LogToBlob "- WebApp Collector: $(if ($webAppCollectorCreated) { 'Created' } else { 'Skipped' })"
         Write-LogToBlob "- SQL Collector: $(if ($sqlCollectorCreated) { 'Created' } else { 'Skipped' })"
-        Write-LogToBlob "- VM Assessment: ID: $vmAssessmentId"
-        Write-LogToBlob "- SQL Assessment ID: $sqlAssessmentId"
+        # Write-LogToBlob "- VM Assessment: ID: $vmAssessmentId"
+        # Write-LogToBlob "- SQL Assessment ID: $sqlAssessmentId"
         # Write-LogToBlob "- PaaS Business Case: $paasBusinessCaseName"
         # Write-LogToBlob "- IaaS Business Case: $iaasBusinessCaseName"
         # Write-LogToBlob "- Global Assessment: $heteroAssessmentName"

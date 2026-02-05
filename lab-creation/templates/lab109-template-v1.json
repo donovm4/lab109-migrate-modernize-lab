@@ -137,7 +137,7 @@
           "variables": {
             "location": "[resourceGroup().location]",
             "projectName": "[format('{0}-prj', parameters('prefix'))]",
-            "migrateProjectName": "[format('{0}-azm', parameters('prefix'))]",
+            "migrateProjectName": "[format('Automated-Migration-Project-{0}', parameters('prefix'))]",
             "applianceName": "[format('{0}-offlinecollector', parameters('prefix'))]"
           },
           "resources": [
@@ -194,7 +194,7 @@
                     }
                   },
                   "variables": {
-                    "migrateProjectName": "[format('{0}-azm', parameters('prefix'))]"
+                    "migrateProjectName": "[format('Automated-Migration-Project-{0}', parameters('prefix'))]"
                   },
                   "resources": [
                     {
@@ -355,7 +355,7 @@
                   "variables": {
                     "location": "[parameters('migrateLocation')]",
                     "projectName": "[parameters('prefix')]",
-                    "migrateProjectName": "[format('{0}-azm', parameters('prefix'))]",
+                    "migrateProjectName": "[format('Automated-Migration-Project-{0}', parameters('prefix'))]",
                     "applianceName": "[format('{0}collector', parameters('prefix'))]",
                     "assessmentProjectName": "[concat(variables('projectName'), 'asmproject')]",
                     "vmwareSiteName": "[concat(variables('projectName'), 'vmwaresite')]",
