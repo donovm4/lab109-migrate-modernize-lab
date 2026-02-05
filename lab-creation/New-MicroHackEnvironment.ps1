@@ -5,9 +5,9 @@
 ######################################################
 
 $SkillableEnvironment = $false
-$EnvironmentName = "AzMigrate" # Set your environment name here for non-Skillable environments
+$EnvironmentName = "mig$(Get-Date -Format 'yyMMddHHmmss')" # Set your environment name here for non-Skillable environments
 $ScriptVersion = "16.0.0"
-# $EnvironmentName = "" # Globally unique! Set your environment name here
+$EnvironmentName = "" # Globally unique! Set your environment name here
 
 if($EnvironmentName -eq "" ) {
     $EnvironmentName = "lab" + (Get-Date -Format "yyMMddHHmmss")
@@ -1394,18 +1394,18 @@ function Invoke-AzureMigrateConfiguration {
         # $iaasBusinessCaseName = New-BusinessCaseIaasOnly -SubscriptionId $subscriptionId -ResourceGroupName $resourceGroupName -AssessmentProjectName $assessmentProjectName -Location $location -VMwareSiteName $vmwareSiteName -MasterSiteName $masterSiteName -WebAppSiteName $webAppSiteName -SqlSiteName $sqlSiteName
         
         # Step 11: Create global assessment
-        $heteroAssessmentName = New-GlobalAssessment -SubscriptionId $subscriptionId -ResourceGroupName $resourceGroupName -AssessmentProjectName $assessmentProjectName -Location $location -VmAssessmentId $vmAssessmentId -SqlAssessmentId $sqlAssessmentId
+        # $heteroAssessmentName = New-GlobalAssessment -SubscriptionId $subscriptionId -ResourceGroupName $resourceGroupName -AssessmentProjectName $assessmentProjectName -Location $location -VmAssessmentId $vmAssessmentId -SqlAssessmentId $sqlAssessmentId
         
         Write-LogToBlob "=== Azure Migrate Configuration Completed Successfully ==="
         Write-LogToBlob "Summary of created resources:"
-        Write-LogToBlob "- VMware Collector: Synchronized"
+        # Write-LogToBlob "- VMware Collector: Synchronized"
         Write-LogToBlob "- WebApp Collector: $(if ($webAppCollectorCreated) { 'Created' } else { 'Skipped' })"
         Write-LogToBlob "- SQL Collector: $(if ($sqlCollectorCreated) { 'Created' } else { 'Skipped' })"
         Write-LogToBlob "- VM Assessment: ID: $vmAssessmentId"
         Write-LogToBlob "- SQL Assessment ID: $sqlAssessmentId"
         # Write-LogToBlob "- PaaS Business Case: $paasBusinessCaseName"
         # Write-LogToBlob "- IaaS Business Case: $iaasBusinessCaseName"
-        Write-LogToBlob "- Global Assessment: $heteroAssessmentName"
+        # Write-LogToBlob "- Global Assessment: $heteroAssessmentName"
     }
     catch {
         Write-LogToBlob "=== Azure Migrate Configuration Failed ===" "ERROR"

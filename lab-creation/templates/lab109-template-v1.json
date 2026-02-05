@@ -19,7 +19,7 @@
     },
     "migrateLocation": {
       "type": "string",
-      "defaultValue": "centralus",
+      "defaultValue": "canadacentral",
       "metadata": {
         "description": "Location for Azure Migrate resources"
       }
