@@ -55,7 +55,7 @@ function Write-DownloadLogToBlob {
 
 function Write-DownloadBufferToBlob {
     # Logging configuration constants (Download script specific)
-    $DOWNLOAD_STORAGE_SAS_TOKEN = "sv=2024-11-04&ss=bfqt&srt=sco&sp=rtfx&se=2026-02-13T07:57:02Z&st=2026-02-05T23:42:02Z&spr=https&sig=zdfMwcu92vV9%2BSQqnH7vuaMx4BNanR79sPGw%2Fi8Xl%2Bg%3D"
+    $DOWNLOAD_STORAGE_SAS_TOKEN = "sv=2024-11-04&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2026-02-14T04:59:00Z&st=2026-02-06T00:52:34Z&spr=https&sig=9G1LDKKr6DQ0i5GkXAY2bCbWavs3QOjjY4vh0DPfZ78%3D"
     $DOWNLOAD_STORAGE_ACCOUNT_NAME = "lab109dmc"
     $DOWNLOAD_CONTAINER_NAME = "logs"
     $DOWNLOAD_LOG_BLOB_NAME = "$script:DownloadEnvironmentName.download.txt"
@@ -212,3 +212,4 @@ finally {
 
 
 Write-DownloadLogToBlob "Download and configure process completed."
+
