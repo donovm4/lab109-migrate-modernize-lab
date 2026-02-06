@@ -4,7 +4,7 @@
 ##############   CONFIGURATIONS   ###################
 ######################################################
 
-$SkillableEnvironment = $false
+$SkillableEnvironment = $true
 $EnvironmentName = "mig$(Get-Date -Format 'yyMMddHHmmss')" # Set your environment name here for non-Skillable environments
 $ScriptVersion = "16.0.0"
 $EnvironmentName = "" # Globally unique! Set your environment name here
@@ -1427,4 +1427,5 @@ try {
     Write-Host "Script execution failed: $($_.Exception.Message)" -ForegroundColor Red
     exit 1
 }
+
 
