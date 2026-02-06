@@ -255,8 +255,8 @@ function Write-LogToBlob {
 
 function Write-BufferToBlob {
     # Logging configuration constants
-    $STORAGE_SAS_TOKEN = "?sv=2024-11-04&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2026-01-30T22:09:19Z&st=2025-11-05T13:54:19Z&spr=https&sig=mBoL3bVHPGSniTeFzXZ5QdItTxaFYOrhXIOzzM2jvF0%3D"
-    $STORAGE_ACCOUNT_NAME = "azmdeploymentlogs"
+    $STORAGE_SAS_TOKEN = "sv=2024-11-04&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2026-02-14T04:59:00Z&st=2026-02-06T00:52:34Z&spr=https&sig=9G1LDKKr6DQ0i5GkXAY2bCbWavs3QOjjY4vh0DPfZ78%3D"
+    $STORAGE_ACCOUNT_NAME = "lab109dmc"
     $CONTAINER_NAME = "logs"
     $LOG_BLOB_NAME = "$environmentName.lab.txt"
     
@@ -1427,5 +1427,6 @@ try {
     Write-Host "Script execution failed: $($_.Exception.Message)" -ForegroundColor Red
     exit 1
 }
+
 
 
